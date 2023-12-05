@@ -12,14 +12,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    <% @portfolio.each do |holding| %>
+      <tr>
+        <td><%= holding.coin.ticker %></td>
+        <td><%= holding.amount %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
   </tbody>
   <tfoot>
     <tr>
