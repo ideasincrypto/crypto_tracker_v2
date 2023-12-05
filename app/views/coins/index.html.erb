@@ -1,0 +1,20 @@
+<h1>Supported Coins</h1>
+
+<ul>
+  <% @coins.each do |coin| %>
+    <li>
+      <div>
+        <h3>Coin: <%= coin.name %></h3>
+        <dl>
+          <dt>API ID:</dt>
+          <dd><%= coin.api_id %></dd>
+          <dt>Ticker:</dt>
+          <dd><%= coin.ticker %></dd>
+          <dt>Status:</dt>
+          <dd><%= coin.enabled? ? "enabled" : "disabled" %></dd>
+        </dl>
+        <%= button_to "DISABLE" %>
+      </div>
+    </li>
+  <% end %>
+</ul>
