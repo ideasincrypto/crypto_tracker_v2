@@ -5,7 +5,10 @@ describe "User visits the home page" do
     it "and see the nav bar" do
       visit root_path
 
-      expect(page).to have_content "CryptoTracker"
+      within "nav" do
+        expect(page).to have_content "CryptoTracker"
+        expect(page).to have_link "Login"
+      end
     end
 
     it "and views the table" do

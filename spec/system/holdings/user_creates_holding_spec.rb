@@ -13,6 +13,7 @@ describe "User visits the new holding page" do
     expect(page).to have_select "holding_coin_id", options: ["Coin", "BTC", "ETH", "ADA"]
     expect(page).to have_field "Amount"
     expect(page).to have_button "Add"
+    expect(page).to have_link "Back"
   end
 
   it "and creates a new Holding" do
@@ -32,5 +33,9 @@ describe "User visits the new holding page" do
       expect(page).to have_content "BTC"
       expect(page).to have_content 0.5
     end
+  end
+
+  it "and can't add a coin that's already in the portfolio" do
+    
   end
 end

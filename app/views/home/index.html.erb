@@ -1,8 +1,13 @@
-<h1>CryptoTracker</h1>
-
 <div>
   <%= link_to "Add new Holding", new_holding_path %>
 </div>
+
+<details id="manage-options">
+  <summary>Manage portfolio</summary>
+  <%= link_to "Deposit" %>
+  <%= link_to "Withdraw" %>
+  <%= link_to "Update" %>
+</details>
 
 <table>
   <thead>
