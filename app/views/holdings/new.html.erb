@@ -1,0 +1,8 @@
+<h1>New Holding</h1>
+
+<%= form_with model: @holding do |f| %>
+  <%= f.collection_select :coin_id, @coins, :id, :ticker, prompt: "Coin" %>
+  <%= f.label :amount %>
+  <%= f.number_field :amount, step: 0.1 %>
+  <%= f.submit "Add" %>
+<% end %>

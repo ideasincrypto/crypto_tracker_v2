@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :coins, only: [:index]
+  resources :holdings, only: [:new, :create]
 end
