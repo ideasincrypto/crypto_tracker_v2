@@ -36,6 +36,15 @@ describe "User visits the new holding page" do
   end
 
   it "and can't add a coin that's already in the portfolio" do
-    
+    btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    holding = Holding.create!(coin: btc, amount: 1)
+
+    visit new_holding_path
+    select "BTC", from: "holding_coin_id"
+    fill_in "Amount", with: 0.2
+    click_on "Add"
+
+    expect(Holding.all.count).to eq 1
+    expect(page).to have_content "BTC is already in yout portfolio. To add funds select the Deposit option."
   end
 end

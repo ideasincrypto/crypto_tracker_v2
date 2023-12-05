@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   resources :coins, only: [:index]
   resources :holdings, only: [:new, :create]
+
+
 end
