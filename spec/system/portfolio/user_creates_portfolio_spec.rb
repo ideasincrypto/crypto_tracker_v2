@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "User Creates a new portfolio" do
-  it "successfuly" do
+  it "successfully" do
     user = User.create!(email: "user@email.com", password: "123456")
 
     login_as user, scope: :user

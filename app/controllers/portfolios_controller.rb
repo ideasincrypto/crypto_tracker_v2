@@ -1,4 +1,5 @@
 class PortfoliosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_account, only: [:new, :create, :index]
   before_action :set_portfolio, only: [:show]
 
