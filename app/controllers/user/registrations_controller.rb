@@ -10,13 +10,13 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super do |user|
-      if user.persisted?
-        user.create_account!
-      end
-    end
-  end
+  # def create
+  #   super do |user|
+  #     if user.persisted?
+  #       user.create_account!
+  #     end
+  #   end
+  # end
 
   # GET /resource/edit
   # def edit
