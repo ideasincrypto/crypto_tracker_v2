@@ -5,6 +5,8 @@ describe "User visits the new holding page" do
     btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     eth = Coin.create!(name: "Ethereum", api_id: "ethereum", ticker: "ETH")
     ada = Coin.create!(name: "Cardano", api_id: "cardano", ticker: "ADA")
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
 
     visit root_path
     click_on "Add new Holding"
@@ -20,15 +22,19 @@ describe "User visits the new holding page" do
     btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     eth = Coin.create!(name: "Ethereum", api_id: "ethereum", ticker: "ETH")
     ada = Coin.create!(name: "Cardano", api_id: "cardano", ticker: "ADA")
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
 
-    visit new_holding_path
+    login_as user
+    visit new_portfolio_holding_path(portfolio)
     select "BTC", from: "holding_coin_id"
     fill_in "Amount", with: 0.5
     click_on "Add"
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq portfolio_path(portfolio)
     expect(Holding.all.count).to eq 1
     expect(page).to have_content "BTC added to Portfolio"
+    expect(page).not_to have_content "Your portfolio is empty. Add coins to see them here"
     within "tbody" do
       expect(page).to have_content "BTC"
       expect(page).to have_content 0.5

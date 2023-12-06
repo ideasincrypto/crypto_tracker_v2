@@ -1,4 +1,6 @@
 class HoldingsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_portfolio, only: [:new, :create]
   before_action :set_coin, only: [:create]
 
   def new
@@ -7,14 +9,16 @@ class HoldingsController < ApplicationController
   end
 
   def create
-    @holding = Holding.new(holding_params)
-
+    @holding = @portfolio.holdings.build(holding_params)
     @holding.save
-
-    redirect_to root_path, notice: "#{@coin.ticker} added to Portfolio"
+    redirect_to @portfolio, notice: "#{@coin.ticker} added to Portfolio"
   end
 
   private
+
+  def set_portfolio
+    @portfolio = Portfolio.find(params[:portfolio_id])
+  end
 
   def holding_params
     params.require(:holding).permit(:coin_id, :amount)

@@ -1,41 +1,19 @@
-<div>
-  <%= link_to "Add new Holding", new_holding_path %>
-</div>
+<section>
+  <nav id="portfolios-menu">
+    <div>
+      <%= button_to "New Portfolio" %>
+    </div>
 
-<details id="manage-options">
-  <summary>Manage portfolio</summary>
-  <%= link_to "Deposit" %>
-  <%= link_to "Withdraw" %>
-  <%= link_to "Update" %>
-</details>
+    <div>
+      <h3>Portfolios</h3>
+    </div>
+    <div>
+      <ul>
+        <% @portfolios.each do |p| %>
+          <li><%= link_to p.name, portfolio_path(p) %></li>
+        <% end %>
+      </ul>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Coin</th>
-      <th>Amount</th>
-      <th>Rate (USD)</th>
-      <th>24h change</th>
-      <th>Value</th>
-      <th>%</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @portfolio.each do |holding| %>
-      <tr>
-        <td><%= holding.ticker %></td>
-        <td><%= holding.amount %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td>TOTAL</td>
-      <td></td>
-    </tr>
-  </tfoot>
-</table>
+  </nav>
+</section>
