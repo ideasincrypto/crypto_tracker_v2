@@ -12,8 +12,10 @@ class PortfoliosController < ApplicationController
 
     if @portfolio.save
       redirect_to @portfolio, notice: "Portfolio created successfuly"
+    else
+      flash.now[:alert] = "ERROR: couldn't save portfolio"
+      render :new
     end
-
   end
 
   def index
