@@ -9,8 +9,9 @@ describe "User signs-up" do
     click_on "Sign up"
 
     expect(User.last.email).to eq "user@email.com"
-    expect(Account.all).to eq 1
+    expect(Account.all.count).to eq 1
+    expect(Account.last.user.email).to eq "user@email.com"
     expect(Account.last.uuid).not_to be_nil
-    expect(Accounts.last.uuid.length).to eq 36
+    expect(Account.last.uuid.length).to eq 36
   end
 end
