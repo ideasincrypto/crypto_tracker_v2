@@ -1,0 +1,17 @@
+<%= render partial: "shared/form_errors", locals: { model: @portfolio } %>
+
+<section>
+  <h1>New Portfolio</h1>
+  
+  <div>
+    <%= form_with model: @portfolio do |f| %>
+      <div>
+        <%= f.label :name, "Portfolio name:" %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.submit "Create" %>
+      </div>
+    <% end %>
+  </div>
+</section>
