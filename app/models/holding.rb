@@ -12,7 +12,7 @@ class Holding < ApplicationRecord
 
   def unique_coin
     # debugger
-    if portfolio&.holdings&.any? { |h| h.coin.id == coin.id}
+    if portfolio&.holdings&.any? { |h| h.coin.id == coin.id && h.id != self.id}
       errors.add(:coin, "#{coin.ticker} is already in your portfolio. To add funds select the Deposit option.")
     end
   end
