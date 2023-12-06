@@ -10,7 +10,6 @@ class HoldingsController < ApplicationController
   end
 
   def create
-    # debugger
     @holding = @portfolio.holdings.build(holding_params)
     if @holding.save
       redirect_to @portfolio, notice: "#{@coin.ticker} added to Portfolio"

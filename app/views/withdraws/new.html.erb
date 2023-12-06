@@ -1,15 +1,15 @@
-<h1>Deposit</h1>
+<h1>Withdraw</h1>
 
 <section>
   <div class="form">
-    <%= form_with url: portfolio_deposits_path(@portfolio), method: :post do |f| %>
+    <%= form_with url: portfolio_withdraws_path(@portfolio), method: :post do |f| %>
       <div>
-        <%= fields_for :deposit do |b| %>
+        <%= fields_for :withdraw do |b| %>
           <%= b.collection_select :coin_id, @coins, :id, :ticker, prompt: "Coin" %>
           <%= b.number_field :amount, step: 0.0001, placeholder: "Amount" %>
           <%= b.hidden_field :portfolio_id, value: @portfolio.id %>
         <% end %>
-        <%= f.submit "Deposit" %>
+        <%= f.submit "Withdraw" %>
       </div>
     <% end %>
   </div>

@@ -6,7 +6,6 @@ class DepositsController < ApplicationController
   def new; end
 
   def create
-    # debugger
     return deposit_error_redirect("Select a valid coin") if deposit_params[:coin_id].blank?
     return deposit_error_redirect("Amount must be a positive number") unless deposit_params[:amount].to_d.positive?
 

@@ -9,13 +9,11 @@ class Holding < ApplicationRecord
   delegate :ticker, to: :coin
 
   def deposit(amount)
-    # debugger
-    unless valid_update_amount?(amount)
-      errors.add(:amount, "Amount must be greater than zero")
-      return
-    end
-
     self.amount += amount
+  end
+
+  def withdraw(amount)
+    self.amount -= amount
   end
 
   private
