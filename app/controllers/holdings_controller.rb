@@ -2,16 +2,21 @@ class HoldingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_portfolio, only: [:new, :create]
   before_action :set_coin, only: [:create]
+  before_action :set_coins, only: [:new]
+
 
   def new
     @holding = Holding.new
-    @coins = Coin.where(enabled: true)
   end
 
   def create
     @holding = @portfolio.holdings.build(holding_params)
-    @holding.save
-    redirect_to @portfolio, notice: "#{@coin.ticker} added to Portfolio"
+    if @holding.save
+      redirect_to @portfolio, notice: "#{@coin.ticker} added to Portfolio"
+    else
+      set_coins
+      render :new
+    end
   end
 
   private
@@ -26,6 +31,10 @@ class HoldingsController < ApplicationController
 
   def set_coin
     @coin = Coin.find(params.dig(:holding, :coin_id))
+  end
+
+  def set_coins
+    @coins = Coin.where(enabled: true)
   end
 
 end

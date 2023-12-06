@@ -1,3 +1,5 @@
+<%= render partial: "shared/form_errors", locals: { model: @holding } %>
+
 <h1>New Holding</h1>
 
 <%= form_with model: [@portfolio, @holding] do |f| %>

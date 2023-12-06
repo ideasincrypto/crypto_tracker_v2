@@ -24,6 +24,19 @@ RSpec.describe Holding, type: :model do
 
       expect(holding.errors.include?(:amount)).to be false
     end
+
+    it "false when coin is not unique in portfolio" do
+      btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+      user = User.create!(email: "user@email.com", password: "123456")
+      portfolio = Portfolio.create!(account: user.account, name: "Tests Portfolio")
+      btc_holding = portfolio.holdings.create!(coin: btc, amount: 1.5)
+      invalid_holding = portfolio.holdings.build(coin: btc, amount: 0.5)
+
+      expect(invalid_holding.valid?).to be false
+      expect(invalid_holding.errors.include?(:coin)).to be true
+      expect(portfolio.holdings.count).to eq 1
+      expect(portfolio.holdings.first.amount).to eq 1.5
+    end
   end
 
   describe "#ticker" do

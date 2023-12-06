@@ -8,7 +8,9 @@ describe "User visits the new holding page" do
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
 
+    login_as user, scope: :user
     visit root_path
+    click_on "Test Portfolio"
     click_on "Add new Holding"
 
     expect(page).to have_content "New Holding"
@@ -43,14 +45,17 @@ describe "User visits the new holding page" do
 
   it "and can't add a coin that's already in the portfolio" do
     btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
-    holding = Holding.create!(coin: btc, amount: 1)
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    holding = Holding.create!(portfolio: portfolio, coin: btc, amount: 1)
 
-    visit new_holding_path
+    login_as user, scope: :user
+    visit new_portfolio_holding_path(portfolio)
     select "BTC", from: "holding_coin_id"
     fill_in "Amount", with: 0.2
     click_on "Add"
 
     expect(Holding.all.count).to eq 1
-    expect(page).to have_content "BTC is already in yout portfolio. To add funds select the Deposit option."
+    expect(page).to have_content "BTC is already in your portfolio. To add funds select the Deposit option."
   end
 end
