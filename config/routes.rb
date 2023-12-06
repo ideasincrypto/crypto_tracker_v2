@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :coins, only: [:index]
-  resources :portfolios, only: [:index, :new, :create]
+  resources :portfolios, only: [:index, :show, :new, :create]
 end

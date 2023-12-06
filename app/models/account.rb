@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
   belongs_to :user
+  has_many :portfolios
 
   before_validation :generate_uuid
 
