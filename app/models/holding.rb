@@ -9,7 +9,13 @@ class Holding < ApplicationRecord
   delegate :ticker, to: :coin
 
   def deposit(amount)
-    self.amount += amount if amount > 0
+    # debugger
+    unless valid_update_amount?(amount)
+      errors.add(:amount, "Amount must be greater than zero")
+      return
+    end
+
+    self.amount += amount
   end
 
   private
@@ -18,5 +24,9 @@ class Holding < ApplicationRecord
     if portfolio&.holdings&.any? { |h| h.coin.id == coin.id && h.id != self.id}
       errors.add(:coin, "#{coin.ticker} is already in your portfolio. To add funds select the Deposit option.")
     end
+  end
+
+  def valid_update_amount?(amount)
+    amount.positive? && amount.is_a?(Numeric)
   end
 end
