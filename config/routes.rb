@@ -5,14 +5,12 @@ Rails.application.routes.draw do
     passwords: "user/passwords"
   }
 
-
   get "up" => "rails/health#show", as: :rails_health_check
-
   root "home#index"
 
   resources :coins, only: [:index]
-  resources :holdings, only: [:new, :create]
 
-
-  resources :portfolios, only: [:index, :show, :new, :create]
+  resources :portfolios, only: [:index, :show, :new, :create] do
+    resources :holdings, only: [:new, :create]
+  end
 end

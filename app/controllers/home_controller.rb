@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @portfolio = Holding.all
+    @portfolios = current_user.account.portfolios.all
   end
 end
