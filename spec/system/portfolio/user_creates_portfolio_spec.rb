@@ -13,8 +13,8 @@ describe "User Creates a new portfolio" do
     expect(user.account.portfolios.last.name).to eq "My Portfolio"
     expect(page).to have_content "Portfolio created successfuly"
     expect(page).to have_content "My Portfolio"
+    expect(page).to have_link "Add new Holding"
     expect(page).to have_content "Your portfolio is empty. Add coins to see them here"
-    expect(page).to have_link "Add Coins"
   end
 
   it "unsuccessfully without name" do

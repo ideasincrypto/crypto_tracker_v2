@@ -16,7 +16,8 @@ class HoldingsController < ApplicationController
       redirect_to @portfolio, notice: "#{@coin.ticker} added to Portfolio"
     else
       set_coins
-      render :new
+      flash.now[:alert] = "ERROR: couldn't save coin"
+      render :new, status: :unprocessable_entity
     end
   end
 

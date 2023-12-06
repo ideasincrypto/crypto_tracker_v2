@@ -5,10 +5,10 @@
     <div>
       <%= link_to "Add new Holding", new_portfolio_holding_path(@portfolio) %>
     </div>
-
+    <br>
     <details id="manage-options">
       <summary>Manage portfolio</summary>
-      <%= link_to "Deposit" %>
+      <%= link_to "Deposit", new_portfolio_deposit_path(@portfolio) %>
       <%= link_to "Withdraw" %>
       <%= link_to "Update" %>
     </details>
@@ -50,7 +50,4 @@
       </tfoot>
     </table>
   </div>
-
-  <%= link_to "Add Coins" %>
-
 </section>

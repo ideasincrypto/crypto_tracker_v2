@@ -28,8 +28,26 @@ describe "User opens the manage options window" do
     find("details#manage-options").click
     click_on "Deposit"
 
-    # expect(page).to have_select "Coin", options: ["Coin", "BTC"]
-    # expect(page).to have_field, "Amount"
-    # expect(page).to have_button "Deposit"
+    expect(page).to have_select "coin_id", options: ["Coin", "BTC"]
+    expect(page).to have_field, "amount"
+    expect(page).to have_button "Deposit"
+  end
+
+  it "and deposits funds to portfolio" do
+    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
+
+    login_as user, scope: :user
+    visit portfolio_path(portfolio)
+    find("details#manage-options").click
+    click_on "Deposit"
+    select "BTC", from: "deposit_coin_id"
+    fill_in "deposit_amount", with: 1
+    click_on "Deposit"
+
+    expect(page).to have_content "Successfully deposited 1.0 BTC"
+    expect(page).to have_content "1.5"
   end
 end
