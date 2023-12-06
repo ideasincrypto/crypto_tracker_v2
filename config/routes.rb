@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: "user/sessions",
+    registrations: "user/registrations",
+    passwords: "user/passwords"
+  }
+
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "home#index"
@@ -8,4 +14,5 @@ Rails.application.routes.draw do
   resources :holdings, only: [:new, :create]
 
 
+  resources :portfolios, only: [:index, :show, :new, :create]
 end
