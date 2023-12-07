@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     resources :holdings, only: [:new, :create]
     resources :deposits, only: [:new, :create]
     resources :withdraws, only: [:new, :create]
+    resources :updates, only: [:new, :create]
   end
 end
