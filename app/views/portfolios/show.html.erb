@@ -8,9 +8,24 @@
     <br>
     <details id="manage-options">
       <summary>Manage portfolio</summary>
-      <%= link_to "Deposit", new_portfolio_deposit_path(@portfolio) %>
-      <%= link_to "Withdraw", new_portfolio_withdraw_path(@portfolio) %>
-      <%= link_to "Update", new_portfolio_update_path(@portfolio) %>
+      <br>
+      <%= form_with model: @portfolio do |f| %>
+        <div>
+          <%= f.radio_button :operation, "deposit" %>
+          <%= f.label :operation_deposit, "Deposit" %>
+          <%= f.radio_button :operation, "withdraw" %>
+          <%= f.label :operation_withdraw, "Withdraw" %>
+          <%= f.radio_button :operation, "update" %>
+          <%= f.label :operation_update, "Update" %>
+        </div>
+        <div>
+          <%= f.collection_select :coin_id, @coins, :id, :ticker, prompt: "Coin" %>
+          <%= f.number_field :amount, placeholder: "Amount" %>
+        </div>
+        <div>
+          <%= f.submit "Confirm" %>
+        </div>
+      <% end %>
     </details>
 
     <br>

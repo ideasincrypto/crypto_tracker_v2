@@ -2,18 +2,22 @@ require "rails_helper"
 
 describe "User opens the manage options window" do
   it "from the home page" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    holding = portfolio.holdings.create(coin: btc, amount: 0.5)
 
     login_as user, scope: :user
     visit root_path
     click_on "Test Portfolio"
     find("details#manage-options").click
 
-    expect(page).to have_link "Deposit"
-    expect(page).to have_link "Withdraw"
-    expect(page).to have_link "Update"
+    expect(page).to have_selector "#portfolio_operation_deposit"
+    expect(page).to have_selector "#portfolio_operation_withdraw"
+    expect(page).to have_selector "#portfolio_operation_update"
+    expect(page).to have_select "portfolio_coin_id", options: ["Coin", "BTC"]
+    expect(page).to have_field "portfolio_amount", type: "number"
+    expect(page).to have_button "Confirm"
   end
 
   it "and accesses the Deposit option" do
