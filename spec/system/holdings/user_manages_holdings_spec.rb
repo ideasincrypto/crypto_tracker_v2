@@ -140,4 +140,25 @@ describe "User opens the manage options window" do
     expect(page).to have_field "update_amount", type: "number"
     expect(page).to have_button "Update"
   end
+
+  it "and updates a holding" do
+    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
+
+    login_as user, scope: :user
+    visit root_path
+    click_on "Test Portfolio"
+    find("details#manage-options").click
+    click_on "Update"
+    select "BTC", from: "update_coin_id"
+    fill_in "update_amount", with: "1.5"
+    click_on "Update"
+
+    holding.reload
+
+    expect(holding.amount).to eq 1.5
+    expect(page).to have_content "1.5"
+  end
 end
