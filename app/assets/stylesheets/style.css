@@ -1,0 +1,12 @@
+table, td, th {
+  border: solid 1px #333;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 5px;
+}
+
+#total-col {
+  text-align: center;
+}

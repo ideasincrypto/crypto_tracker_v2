@@ -1,2 +1,19 @@
-<h1>CryptoTracker</h1>
+<section>
+  <nav id="portfolios-menu">
+    <div>
+      <%= button_to "New Portfolio" %>
+    </div>
 
+    <div>
+      <h3>Portfolios</h3>
+    </div>
+    <div>
+      <ul>
+        <% @portfolios.each do |p| %>
+          <li><%= link_to p.name, portfolio_path(p) %></li>
+        <% end %>
+      </ul>
+    </div>
+
+  </nav>
+</section>

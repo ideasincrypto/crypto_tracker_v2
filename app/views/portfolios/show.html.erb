@@ -1,8 +1,55 @@
 <section>
   <h1><%= @portfolio.name %></h1>
 
-  <p>Your portfolio is empty. Add coins to see them here</p>
+  <div id="portfolio-container">
+    <div>
+      <%= link_to "Add new Holding", new_portfolio_holding_path(@portfolio) %>
+    </div>
+    <br>
+    <details id="manage-options">
+      <summary>Manage portfolio</summary>
+      <%= link_to "Deposit", new_portfolio_deposit_path(@portfolio) %>
+      <%= link_to "Withdraw", new_portfolio_withdraw_path(@portfolio) %>
+      <%= link_to "Update", new_portfolio_update_path(@portfolio) %>
+    </details>
 
-  <%= link_to "Add Coins" %>
+    <br>
 
+    <% if @portfolio.holdings.empty? %>
+      <div>
+        <p>Your portfolio is empty. Add coins to see them here</p>
+      </div>
+    <% end %>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Coin</th>
+          <th>Amount</th>
+          <th>Rate (USD)</th>
+          <th>24h change</th>
+          <th>Value</th>
+          <th>%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @portfolio.holdings.each do |holding| %>
+          <tr>
+            <td><%= holding.ticker %></td>
+            <td><%= holding.amount %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" id="total-col">TOTAL</td>
+          <td colspan="2"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </section>

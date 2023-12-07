@@ -11,12 +11,21 @@
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <li>CryptoTracker</li>
+        <% if user_signed_in? %>
+          <li><%= current_user.email %></li>
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
 
     <div>
       <%= notice %>
       <%= alert %>
     </div>
-
 
     <%= yield %>
   </body>

@@ -1,7 +1,7 @@
 class PortfoliosController < ApplicationController
   before_action :authenticate_user!
   before_action :set_account, only: [:new, :create, :index]
-  before_action :set_portfolio, only: [:show]
+  before_action :set_portfolio, only: [:show, :index]
 
   def new
     @portfolio = Portfolio.new
@@ -18,12 +18,9 @@ class PortfoliosController < ApplicationController
     end
   end
 
-  def index
-  end
+  def index; end
 
-  def show
-
-  end
+  def show; end
 
   private
 

@@ -1,0 +1,12 @@
+<%= render partial: "shared/form_errors", locals: { model: @holding } %>
+
+<h1>New Holding</h1>
+
+<%= form_with model: [@portfolio, @holding] do |f| %>
+  <%= f.collection_select :coin_id, @coins, :id, :ticker, prompt: "Coin" %>
+  <%= f.label :amount %>
+  <%= f.number_field :amount, step: 0.0001, placeholder: 0.0 %>
+  <%= f.submit "Add" %>
+<% end %>
+
+<%= link_to "Back", root_path %>
