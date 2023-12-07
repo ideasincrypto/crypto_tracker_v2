@@ -7,7 +7,7 @@ describe "User visits the home page" do
 
       within "nav" do
         expect(page).to have_content "CryptoTracker"
-        expect(page).to have_link "Login"
+        expect(page).to have_link "Log in"
       end
     end
   end
