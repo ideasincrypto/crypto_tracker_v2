@@ -1,0 +1,17 @@
+<%= form_with url: portfolio_holding_path(portfolio), method: :put do |f| %>
+  <div>
+    <%= f.radio_button :operation, "deposit" %>
+    <%= f.label :operation_deposit, "Deposit" %>
+    <%= f.radio_button :operation, "withdraw" %>
+    <%= f.label :operation_withdraw, "Withdraw" %>
+    <%= f.radio_button :operation, "update" %>
+    <%= f.label :operation_update, "Update" %>
+  </div>
+  <div>
+    <%= f.collection_select :coin_id, coins, :id, :ticker, prompt: "Coin" %>
+    <%= f.number_field :amount, step: 0.00001, placeholder: "Amount" %>
+  </div>
+  <div>
+    <%= f.submit "Confirm", id: "confirm_button" %>
+  </div>
+<% end %>

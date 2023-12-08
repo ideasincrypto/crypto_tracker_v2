@@ -1,7 +1,9 @@
 <div id="error-msgs">
-  <ul>
-    <% model.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <% if model.errors.any? %>
+    <ul>
+      <% model.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

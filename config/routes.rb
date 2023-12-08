@@ -11,9 +11,6 @@ Rails.application.routes.draw do
   resources :coins, only: [:index]
 
   resources :portfolios, only: [:index, :show, :new, :create] do
-    resources :holdings, only: [:new, :create]
-    resources :deposits, only: [:new, :create]
-    resources :withdraws, only: [:new, :create]
-    resources :updates, only: [:new, :create]
+    resources :holdings, only: [:new, :create, :update]
   end
 end
