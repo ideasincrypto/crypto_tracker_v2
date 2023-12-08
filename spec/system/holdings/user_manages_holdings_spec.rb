@@ -12,11 +12,11 @@ describe "User opens the manage options window" do
     click_on "Test Portfolio"
     find("details#manage-options").click
 
-    expect(page).to have_selector "#portfolio_operation_deposit"
-    expect(page).to have_selector "#portfolio_operation_withdraw"
-    expect(page).to have_selector "#portfolio_operation_update"
-    expect(page).to have_select "portfolio_coin_id", options: ["Coin", "BTC"]
-    expect(page).to have_field "portfolio_amount", type: "number"
+    expect(page).to have_selector "#operation_deposit"
+    expect(page).to have_selector "#operation_withdraw"
+    expect(page).to have_selector "#operation_update"
+    expect(page).to have_select "coin_id", options: ["Coin", "BTC"]
+    expect(page).to have_field "amount", type: "number"
     expect(page).to have_button "Confirm"
   end
 
