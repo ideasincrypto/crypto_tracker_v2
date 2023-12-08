@@ -30,6 +30,9 @@ class HoldingsController < ApplicationController
       when "withdraw"
         @holding.withdraw(operation_params[:amount].to_d)
         redirect_to @portfolio, notice: "Successfully withdrew #{operation_params[:amount].to_d} #{@holding.ticker}"
+      when "update"
+        @holding.update_value(operation_params[:amount].to_d)
+        redirect_to @portfolio, notice: "Updated #{@holding.ticker} value to #{operation_params[:amount].to_d}"
       end
 
     rescue ArgumentError => e

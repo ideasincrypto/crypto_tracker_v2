@@ -99,23 +99,6 @@ describe "User opens the manage options window" do
     expect(page).to have_content "0.5"
   end
 
-  it "and accesses the update option" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
-    user = User.create!(email: "user@email.com", password: "123456")
-    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
-    holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
-
-    login_as user, scope: :user
-    visit root_path
-    click_on "Test Portfolio"
-    find("details#manage-options").click
-    click_on "Update"
-
-    expect(page).to have_select "update_coin_id", options: ["Coin", "BTC"]
-    expect(page).to have_field "update_amount", type: "number"
-    expect(page).to have_button "Update"
-  end
-
   it "and updates a holding" do
     coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     user = User.create!(email: "user@email.com", password: "123456")
@@ -123,16 +106,16 @@ describe "User opens the manage options window" do
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
 
     login_as user, scope: :user
-    visit root_path
-    click_on "Test Portfolio"
+    visit portfolio_path(portfolio)
     find("details#manage-options").click
-    click_on "Update"
-    select "BTC", from: "update_coin_id"
-    fill_in "update_amount", with: "1.5"
-    click_on "Update"
+    find("#operation_update").click
+    select "BTC", from: "coin_id"
+    fill_in "amount", with: "1.5"
+    click_on "Confirm"
 
     holding.reload
 
+    expect(page).to have_content "Updated BTC value to 1.5"
     expect(holding.amount).to eq 1.5
     expect(page).to have_content "1.5"
   end

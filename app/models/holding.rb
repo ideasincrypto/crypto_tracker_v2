@@ -20,6 +20,12 @@ class Holding < ApplicationRecord
     self.save
   end
 
+  def update_value(amount)
+    raise ArgumentError, "Amount must be positive" unless amount.positive?
+    self.amount = amount
+    self.save
+  end
+
   private
 
   def unique_coin
