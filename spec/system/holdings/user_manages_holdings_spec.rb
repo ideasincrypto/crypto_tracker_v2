@@ -119,4 +119,22 @@ describe "User opens the manage options window" do
     expect(holding.amount).to eq 1.5
     expect(page).to have_content "1.5"
   end
+
+  it "and can't update a holding with invalid params" do
+    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
+
+    login_as user, scope: :user
+    visit portfolio_path(portfolio)
+    find("details#manage-options").click
+    find("#operation_update").click
+    select "BTC", from: "coin_id"
+    fill_in "amount", with: "-8"
+    click_on "Confirm"
+
+    expect(page).to have_content "Amount must be positive"
+    expect(holding.amount).to eq 0.5
+  end
 end
