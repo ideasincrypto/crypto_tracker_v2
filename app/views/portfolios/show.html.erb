@@ -20,7 +20,7 @@
         </div>
         <div>
           <%= f.collection_select :coin_id, @coins, :id, :ticker, prompt: "Coin" %>
-          <%= f.number_field :amount, placeholder: "Amount" %>
+          <%= f.number_field :amount, step: 0.00001, placeholder: "Amount" %>
         </div>
         <div>
           <%= f.submit "Confirm" %>

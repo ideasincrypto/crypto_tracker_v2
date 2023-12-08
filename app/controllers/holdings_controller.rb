@@ -5,7 +5,6 @@ class HoldingsController < ApplicationController
   before_action :set_coins, only: [:new]
   before_action :set_holding, only: [:update]
 
-
   def new
     @holding = Holding.new
   end
@@ -22,12 +21,22 @@ class HoldingsController < ApplicationController
   end
 
   def update
-    # debugger
-    case operation_params[:operation]
-    when "deposit"
-      @holding.deposit(operation_params[:amount].to_d)
-      @holding.save
-      return redirect_to @portfolio, notice: "Successfully deposited 1.0 BTC"
+    begin
+
+      case operation_params[:operation]
+      when "deposit"
+        @holding.deposit(operation_params[:amount].to_d)
+        redirect_to @portfolio, notice: "Successfully deposited #{operation_params[:amount].to_d} #{@holding.ticker}"
+      when "withdraw"
+        @holding.withdraw(operation_params[:amount].to_d)
+        redirect_to @portfolio, notice: "Successfully withdrew #{operation_params[:amount].to_d} #{@holding.ticker}"
+      end
+
+    rescue ArgumentError => e
+      set_portfolio
+      set_coins
+      flash.now[:error] = e.message
+      render "portfolios/show", status: :unprocessable_entity
     end
   end
 

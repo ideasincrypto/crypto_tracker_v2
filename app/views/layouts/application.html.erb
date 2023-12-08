@@ -24,8 +24,9 @@
     </nav>
 
     <div>
-      <%= notice %>
-      <%= alert %>
+      <%= flash[:notice] %>
+      <%= flash[:alert] %>
+      <%= flash[:error] %>
     </div>
 
     <%= yield %>

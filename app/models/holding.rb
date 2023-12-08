@@ -9,11 +9,15 @@ class Holding < ApplicationRecord
   delegate :ticker, to: :coin
 
   def deposit(amount)
+    raise ArgumentError, "Amount must be positive" unless amount.positive?
     self.amount += amount
+    self.save
   end
 
   def withdraw(amount)
+    raise ArgumentError, "Not enough funds to withdraw" unless self.amount >= amount
     self.amount -= amount
+    self.save
   end
 
   private
