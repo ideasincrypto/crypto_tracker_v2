@@ -23,7 +23,7 @@
           <%= f.number_field :amount, step: 0.00001, placeholder: "Amount" %>
         </div>
         <div>
-          <%= f.submit "Confirm" %>
+          <%= f.submit "Confirm", id: "confirm_button" %>
         </div>
       <% end %>
     </details>
@@ -68,3 +68,22 @@
     </table>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var coinSelect = document.getElementById("coin_id");
+    var confirmButton = document.getElementById("confirm_button");
+
+    if (coinSelect.value === "") {
+      confirmButton.disabled = true;
+    }
+    
+    coinSelect.addEventListener("change", function() {
+      if (this.value === "") {
+        confirmButton.disabled = true;
+      } else {
+        confirmButton.disabled = false;
+      }
+    });
+  });
+</script>

@@ -41,7 +41,7 @@ describe "User opens the manage options window" do
     expect(page).to have_content "1.5"
   end
 
-  it "and can't deposit with invalid params" do
+  it "and can't deposit with negative amount" do
     coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
@@ -80,7 +80,7 @@ describe "User opens the manage options window" do
     expect(holding.amount).to eq 0.3
   end
 
-  it "can't withdraw with invalid params" do
+  it "and can't withdraw more than the holdings total" do
     coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
@@ -120,7 +120,7 @@ describe "User opens the manage options window" do
     expect(page).to have_content "1.5"
   end
 
-  it "and can't update a holding with invalid params" do
+  it "and can't update a holding with negative amount" do
     coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")

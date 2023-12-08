@@ -35,7 +35,7 @@ class HoldingsController < ApplicationController
         redirect_to @portfolio, notice: "Updated #{@holding.ticker} value to #{operation_params[:amount].to_d}"
       end
 
-    rescue ArgumentError => e
+    rescue ArgumentError, StandardError => e
       set_portfolio
       set_coins
       flash.now[:error] = e.message
