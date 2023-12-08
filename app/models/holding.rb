@@ -10,18 +10,22 @@ class Holding < ApplicationRecord
 
   def deposit(amount)
     raise ArgumentError, "Amount must be positive" unless amount.positive?
+
     self.amount += amount
     self.save
   end
 
   def withdraw(amount)
     raise ArgumentError, "Not enough funds to withdraw" unless self.amount >= amount
+    raise ArgumentError, "Amount must be positive" unless amount.positive?
+
     self.amount -= amount
     self.save
   end
 
   def update_value(amount)
-    raise ArgumentError, "Amount must be positive" unless amount.positive?
+    raise ArgumentError, "Amount must be positive" unless amount >= 0
+
     self.amount = amount
     self.save
   end
