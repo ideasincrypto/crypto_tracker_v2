@@ -6,9 +6,7 @@
       <%= link_to "Add new Holding", new_portfolio_holding_path(@portfolio) %>
     </div>
     <br>
-    <details id="manage-options">
-      <summary>Manage portfolio</summary>
-      <br>
+    <div id="manage-options">
       <%= form_with url: portfolio_holding_path(@portfolio), method: :put do |f| %>
         <div>
           <%= f.radio_button :operation, "deposit" %>
@@ -26,7 +24,7 @@
           <%= f.submit "Confirm", id: "confirm_button" %>
         </div>
       <% end %>
-    </details>
+    </div>
 
     <br>
 

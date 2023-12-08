@@ -10,7 +10,6 @@ describe "User opens the manage options window" do
     login_as user, scope: :user
     visit root_path
     click_on "Test Portfolio"
-    find("details#manage-options").click
 
     expect(page).to have_selector "#operation_deposit"
     expect(page).to have_selector "#operation_withdraw"
@@ -28,7 +27,6 @@ describe "User opens the manage options window" do
 
     login_as user, scope: :user
     visit portfolio_path(portfolio)
-    find("details#manage-options").click
     find("#operation_deposit").click
     select "BTC", from: "coin_id"
     fill_in "amount", with: 1
@@ -49,7 +47,6 @@ describe "User opens the manage options window" do
 
     login_as user, scope: :user
     visit portfolio_path(portfolio)
-    find("details#manage-options").click
     find("#operation_deposit").click
     select "BTC", from: "coin_id"
     fill_in "amount", with: -3
@@ -67,7 +64,6 @@ describe "User opens the manage options window" do
 
     login_as user, scope: :user
     visit portfolio_path(portfolio)
-    find("#manage-options").click
     find("#operation_withdraw").click
     select "BTC", from: "coin_id"
     fill_in "amount", with: 0.2
@@ -88,7 +84,6 @@ describe "User opens the manage options window" do
 
     login_as user, scope: :user
     visit portfolio_path(portfolio)
-    find("#manage-options").click
     find("#operation_withdraw").click
     select "BTC", from: "coin_id"
     fill_in "amount", with: 1
@@ -107,7 +102,6 @@ describe "User opens the manage options window" do
 
     login_as user, scope: :user
     visit portfolio_path(portfolio)
-    find("details#manage-options").click
     find("#operation_update").click
     select "BTC", from: "coin_id"
     fill_in "amount", with: "1.5"
@@ -128,7 +122,6 @@ describe "User opens the manage options window" do
 
     login_as user, scope: :user
     visit portfolio_path(portfolio)
-    find("details#manage-options").click
     find("#operation_update").click
     select "BTC", from: "coin_id"
     fill_in "amount", with: "-8"
