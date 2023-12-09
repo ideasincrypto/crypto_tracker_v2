@@ -2,13 +2,15 @@ require "rails_helper"
 
 describe "User visits the home page" do
   context "not authenticated" do
-    it "and see the nav bar" do
+    it "and views the app info page" do
       visit root_path
 
+      expect(current_path).to eq visitors_path
       within "nav" do
         expect(page).to have_content "CryptoTracker"
         expect(page).to have_link "Log in"
       end
+      expect(page).to have_link "Create your account"
     end
   end
 
