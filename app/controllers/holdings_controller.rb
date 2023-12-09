@@ -1,6 +1,6 @@
 class HoldingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_portfolio, only: [:new, :create, :update]
+  before_action :set_portfolio, only: [:new, :create, :update, :destroy]
   before_action :set_coin, only: [:create]
   before_action :set_coins, only: [:new]
   before_action :set_holding, only: [:update]
@@ -22,7 +22,6 @@ class HoldingsController < ApplicationController
 
   def update
     begin
-
       case operation_params[:operation]
       when "deposit"
         @holding.deposit(operation_params[:amount].to_d)
@@ -34,12 +33,18 @@ class HoldingsController < ApplicationController
         @holding.update_value(operation_params[:amount].to_d)
         redirect_to @portfolio, notice: "Updated #{@holding.ticker} value to #{operation_params[:amount].to_d}"
       end
-
     rescue ArgumentError, StandardError => e
       set_portfolio
       set_coins
       flash.now[:error] = e.message
       render "portfolios/show", status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    holding = Holding.find(params[:id])
+    if holding.destroy!
+      redirect_to @portfolio, notice: "#{holding.ticker} removed from portfolio"
     end
   end
 
