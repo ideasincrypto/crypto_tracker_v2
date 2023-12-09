@@ -28,6 +28,7 @@
             <th>24h change</th>
             <th>Value</th>
             <th>%</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,9 @@
               <td></td>
               <td></td>
               <td></td>
+              <td style="text-align: center;">
+                <%= button_to "X", portfolio_holding_path(@portfolio, holding), method: :delete, data: { turbo_confirm: "Remove #{holding.ticker} from portfolio?" } %>
+              </td>
             </tr>
           <% end %>
         </tbody>
@@ -52,22 +56,3 @@
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var coinSelect = document.getElementById("coin_id");
-    var confirmButton = document.getElementById("confirm_button");
-
-    if (coinSelect.value === "") {
-      confirmButton.disabled = true;
-    }
-    
-    coinSelect.addEventListener("change", function() {
-      if (this.value === "") {
-        confirmButton.disabled = true;
-      } else {
-        confirmButton.disabled = false;
-      }
-    });
-  });
-</script>

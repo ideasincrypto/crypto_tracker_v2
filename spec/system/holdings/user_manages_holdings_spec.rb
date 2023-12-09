@@ -130,4 +130,23 @@ describe "User opens the manage options window" do
     expect(page).to have_content "Amount must be positive"
     expect(holding.amount).to eq 0.5
   end
+
+  it "and deletes a holding" do
+    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    user = User.create!(email: "user@email.com", password: "123456")
+    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
+
+    login_as user, scope: :user
+    visit portfolio_path(portfolio)
+    within "#coins-table" do
+      click_on "X"
+    end
+
+    expect(page).to have_content "BTC removed from portfolio"
+    within "table" do
+      expect(page).not_to have_content "BTC"
+    end
+    expect(Holding.all.count).to eq 0
+  end
 end
