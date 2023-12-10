@@ -37,9 +37,12 @@ describe "User visits the new holding page" do
     expect(Holding.all.count).to eq 1
     expect(page).to have_content "BTC added to Portfolio"
     expect(page).not_to have_content "Your portfolio is empty. Add coins to see them here"
+    expect(Holding.last.coin.rate).to eq 43882.07
     within "tbody" do
       expect(page).to have_content "BTC"
       expect(page).to have_content 0.5
+      expect(page).to have_content 43882.07
+      expect(page).to have_content 21941.04
     end
   end
 
