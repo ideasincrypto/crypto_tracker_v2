@@ -13,8 +13,8 @@ class PortfoliosController < ApplicationController
     if @portfolio.save
       redirect_to @portfolio, notice: "Portfolio created successfuly"
     else
-      flash.now[:alert] = "ERROR: couldn't save portfolio"
-      render :new
+      flash.now[:error] = "ERROR: couldn't save portfolio"
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -22,13 +22,6 @@ class PortfoliosController < ApplicationController
 
   def show
     @coins = @portfolio.holdings.map { |h| h.coin }
-  end
-
-  def refresh
-    # instantiate connection object
-    # instantiate api request object
-    # make a request for all coins in portfolio
-    # update all holdings' rate attribute
   end
 
   private

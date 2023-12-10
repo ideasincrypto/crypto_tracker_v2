@@ -4,6 +4,7 @@ class HoldingsController < ApplicationController
   before_action :set_coin, only: [:create]
   before_action :set_coins, only: [:new]
   before_action :set_holding, only: [:update]
+  before_action :set_request_service, only: [:create, :update]
 
   def new
     @holding = Holding.new
@@ -11,6 +12,8 @@ class HoldingsController < ApplicationController
 
   def create
     @holding = @portfolio.holdings.build(holding_params)
+    @coin.set_rate(@request_service)
+
     if @holding.save
       redirect_to @portfolio, notice: "#{@coin.ticker} added to Portfolio"
     else
@@ -75,5 +78,10 @@ class HoldingsController < ApplicationController
       portfolio_id: operation_params[:portfolio_id],
       coin_id: operation_params[:coin_id]
     )
+  end
+
+  def set_request_service
+    conn = ApiConnectionService.build
+    @request_service = ApiRequestsService.new(conn)
   end
 end
