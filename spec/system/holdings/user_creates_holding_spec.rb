@@ -31,7 +31,7 @@ describe "User visits the new holding page" do
     conn = ApiConnectionService.build
     request_service = ApiRequestsService.new(conn)
 
-    login_as user
+    login_as user, scope: :user
     visit new_portfolio_holding_path(portfolio)
     select "BTC", from: "holding_coin_id"
     fill_in "Amount", with: 0.5

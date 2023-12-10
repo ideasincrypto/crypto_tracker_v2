@@ -6,7 +6,7 @@ class Holding < ApplicationRecord
 
   validate :unique_coin
 
-  delegate :ticker, to: :coin
+  delegate :ticker, :rate, to: :coin
 
   def deposit(amount)
     raise ArgumentError, "Amount must be positive" unless amount.positive?
@@ -25,6 +25,10 @@ class Holding < ApplicationRecord
     raise ArgumentError, "Amount must be positive" unless amount >= 0
     self.amount = amount
     self.save
+  end
+
+  def value
+    (self.amount * self.rate).round(2)
   end
 
   private
