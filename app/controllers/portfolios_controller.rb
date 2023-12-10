@@ -24,6 +24,13 @@ class PortfoliosController < ApplicationController
     @coins = @portfolio.holdings.map { |h| h.coin }
   end
 
+  def refresh
+    # instantiate connection object
+    # instantiate api request object
+    # make a request for all coins in portfolio
+    # update all holdings' rate attribute
+  end
+
   private
 
   def set_portfolio
