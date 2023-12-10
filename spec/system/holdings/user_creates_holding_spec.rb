@@ -26,11 +26,17 @@ describe "User visits the new holding page" do
     ada = Coin.create!(name: "Cardano", api_id: "cardano", ticker: "ADA")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    json_contract = File.read(Rails.root.join("spec/support/json/btc_rate_contract.json"))
+    fake_response = double("res", status: 200, body: json_contract)
+    conn = ApiConnectionService.build
+    request_service = ApiRequestsService.new(conn)
 
     login_as user
     visit new_portfolio_holding_path(portfolio)
     select "BTC", from: "holding_coin_id"
     fill_in "Amount", with: 0.5
+    allow(ApiConnectionService).to receive(:build).and_return(conn)
+    allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
     click_on "Add"
 
     expect(current_path).to eq portfolio_path(portfolio)
