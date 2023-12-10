@@ -29,7 +29,6 @@ describe "User visits the new holding page" do
     json_contract = File.read(Rails.root.join("spec/support/json/btc_rate_contract.json"))
     fake_response = double("res", status: 200, body: json_contract)
     conn = ApiConnectionService.build
-    request_service = ApiRequestsService.new(conn)
 
     login_as user, scope: :user
     visit new_portfolio_holding_path(portfolio)

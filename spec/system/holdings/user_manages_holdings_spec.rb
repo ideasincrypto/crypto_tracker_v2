@@ -119,8 +119,13 @@ describe "User opens the manage options window" do
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
+    conn = ApiConnectionService.build
+    json_contract = File.read(Rails.root.join("spec/support/json/btc_rate_contract.json"))
+    fake_response = double("res", status: 200, body: json_contract)
 
     login_as user, scope: :user
+    allow(ApiConnectionService).to receive(:build).and_return(conn)
+    allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
     visit portfolio_path(portfolio)
     find("#operation_update").click
     select "BTC", from: "coin_id"
@@ -136,8 +141,13 @@ describe "User opens the manage options window" do
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
+    json_contract = File.read(Rails.root.join("spec/support/json/btc_rate_contract.json"))
+    fake_response = double("res", status: 200, body: json_contract)
+    conn = ApiConnectionService.build
 
     login_as user, scope: :user
+    allow(ApiConnectionService).to receive(:build).and_return(conn)
+    allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
     visit portfolio_path(portfolio)
     within "#coins-table" do
       click_on "X"

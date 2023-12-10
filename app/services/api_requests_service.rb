@@ -6,7 +6,7 @@ class ApiRequestsService
   def get_rates(*coins)
     res = @conn.get("api/v3/simple/price") do |req|
       req.headers["Content-Type"] = "application/json"
-      req.params["ids"] = convert_to_string(coins)
+      req.params["ids"] = convert_to_string(coins.flatten)
       req.params["vs_currencies"] = "usd"
       req.params["precision"] = 2
     end
@@ -16,7 +16,7 @@ class ApiRequestsService
 
   private
 
-  def convert_to_string(coin_arr)
-    string = coin_arr.map { |c| c.api_id }.join(",")
+  def convert_to_string(coins)
+    coins.map { |c| c.api_id }.join(",")
   end
 end

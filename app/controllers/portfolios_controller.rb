@@ -2,6 +2,7 @@ class PortfoliosController < ApplicationController
   before_action :authenticate_user!
   before_action :set_account, only: [:new, :create, :index]
   before_action :set_portfolio, only: [:show, :index]
+  before_action :set_request_service, only: [:show]
 
   def new
     @portfolio = Portfolio.new
@@ -22,6 +23,8 @@ class PortfoliosController < ApplicationController
 
   def show
     @coins = @portfolio.holdings.map { |h| h.coin }
+    @portfolio.refresh_rates(@request_service)
+    @portfolio.holdings.reload
   end
 
   private
@@ -36,5 +39,10 @@ class PortfoliosController < ApplicationController
 
   def portfolio_params
     params.require(:portfolio).permit(:name)
+  end
+
+  def set_request_service
+    conn = ApiConnectionService.build
+    @request_service = ApiRequestsService.new(conn)
   end
 end
