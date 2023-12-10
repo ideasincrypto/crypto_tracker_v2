@@ -10,7 +10,7 @@ describe "User logs out" do
       click_on "Log out"
     end
 
-    expect(current_path).to eq new_user_session_path
+    expect(current_path).to eq visitors_path
     within "nav#navigation-bar" do
       expect(page).to have_link "Log in"
       expect(page).not_to have_button "Log out"
