@@ -6,11 +6,10 @@ class Holding < ApplicationRecord
 
   validate :unique_coin
 
-  delegate :ticker, to: :coin
+  delegate :ticker, :rate, to: :coin
 
   def deposit(amount)
     raise ArgumentError, "Amount must be positive" unless amount.positive?
-
     self.amount += amount
     self.save
   end
@@ -18,16 +17,18 @@ class Holding < ApplicationRecord
   def withdraw(amount)
     raise ArgumentError, "Not enough funds to withdraw" unless self.amount >= amount
     raise ArgumentError, "Amount must be positive" unless amount.positive?
-
     self.amount -= amount
     self.save
   end
 
   def update_value(amount)
     raise ArgumentError, "Amount must be positive" unless amount >= 0
-
     self.amount = amount
     self.save
+  end
+
+  def value
+    (self.amount * self.rate).round(2)
   end
 
   private

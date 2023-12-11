@@ -36,9 +36,9 @@
             <tr>
               <td><%= holding.ticker %></td>
               <td><%= holding.amount %></td>
+              <td><%= holding.rate %></td>
               <td></td>
-              <td></td>
-              <td></td>
+              <td><%= holding.value %></td>
               <td></td>
               <td style="text-align: center;">
                 <%= button_to "X", portfolio_holding_path(@portfolio, holding), method: :delete, data: { turbo_confirm: "Remove #{holding.ticker} from portfolio?" } %>

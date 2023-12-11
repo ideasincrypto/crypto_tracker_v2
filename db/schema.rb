@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_06_121340) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_11_205638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_06_121340) do
     t.boolean "enabled", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "rate", default: "0.0"
+    t.index ["api_id"], name: "unique_api_id_index", unique: true
+    t.index ["name"], name: "unique_name_index", unique: true
+    t.index ["ticker"], name: "unique_ticker_index", unique: true
   end
 
   create_table "holdings", force: :cascade do |t|

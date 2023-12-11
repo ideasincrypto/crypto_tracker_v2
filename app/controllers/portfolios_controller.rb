@@ -2,6 +2,7 @@ class PortfoliosController < ApplicationController
   before_action :authenticate_user!
   before_action :set_account, only: [:new, :create, :index]
   before_action :set_portfolio, only: [:show, :index]
+  before_action :set_request_service, only: [:show]
 
   def new
     @portfolio = Portfolio.new
@@ -13,14 +14,16 @@ class PortfoliosController < ApplicationController
     if @portfolio.save
       redirect_to @portfolio, notice: "Portfolio created successfuly"
     else
-      flash.now[:alert] = "ERROR: couldn't save portfolio"
-      render :new
+      flash.now[:error] = "ERROR: couldn't save portfolio"
+      render :new, status: :unprocessable_entity
     end
   end
 
   def index; end
 
   def show
+    @portfolio.refresh_rates(@request_service)
+    @portfolio.holdings.reload
     @coins = @portfolio.holdings.map { |h| h.coin }
   end
 
@@ -36,5 +39,10 @@ class PortfoliosController < ApplicationController
 
   def portfolio_params
     params.require(:portfolio).permit(:name)
+  end
+
+  def set_request_service
+    conn = ApiConnectionService.build
+    @request_service = ApiRequestsService.new(conn)
   end
 end
