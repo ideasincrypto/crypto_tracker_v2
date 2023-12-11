@@ -22,9 +22,9 @@ class PortfoliosController < ApplicationController
   def index; end
 
   def show
-    @coins = @portfolio.holdings.map { |h| h.coin }
     @portfolio.refresh_rates(@request_service)
     @portfolio.holdings.reload
+    @coins = @portfolio.holdings.map { |h| h.coin }
   end
 
   private
