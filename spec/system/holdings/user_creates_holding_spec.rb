@@ -7,9 +7,14 @@ describe "User visits the new holding page" do
     ada = Coin.create!(name: "Cardano", api_id: "cardano", ticker: "ADA")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
+    json_contract = File.read(Rails.root.join("spec/support/json/rates_contract.json"))
+    fake_response = double("res", status: 200, body: json_contract)
+    conn = ApiConnectionService.build
 
     login_as user, scope: :user
     visit root_path
+    allow(ApiConnectionService).to receive(:build).and_return(conn)
+    allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
     click_on "Test Portfolio"
     click_on "Add new Holding"
 
@@ -56,12 +61,17 @@ describe "User visits the new holding page" do
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = Holding.create!(portfolio: portfolio, coin: btc, amount: 1)
+    json_contract = File.read(Rails.root.join("spec/support/json/rates_contract.json"))
+    fake_response = double("res", status: 200, body: json_contract)
+    conn = ApiConnectionService.build
 
     login_as user, scope: :user
     visit new_portfolio_holding_path(portfolio)
     select "BTC", from: "holding_coin_id"
     fill_in "Amount", with: 0.2
     click_on "Add"
+    allow(ApiConnectionService).to receive(:build).and_return(conn)
+    allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
 
     expect(Holding.all.count).to eq 1
     expect(page).to have_content "BTC is already in your portfolio. To add funds select the Deposit option."

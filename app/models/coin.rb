@@ -2,7 +2,7 @@ class Coin < ApplicationRecord
   has_many :holdings
 
   validates :name, :api_id, :ticker, presence: true
-  validates :name, :api_id, :ticker, :icon, uniqueness: true
+  validates :name, :api_id, :ticker, uniqueness: true
   validates :rate, numericality: { greater_than_or_equal_to: 0 }
 
   def set_rate(request_service)

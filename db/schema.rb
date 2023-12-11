@@ -33,7 +33,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_11_205638) do
     t.datetime "updated_at", null: false
     t.decimal "rate", default: "0.0"
     t.index ["api_id"], name: "unique_api_id_index", unique: true
-    t.index ["icon"], name: "unique_icon_index", unique: true
     t.index ["name"], name: "unique_name_index", unique: true
     t.index ["ticker"], name: "unique_ticker_index", unique: true
   end

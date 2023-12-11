@@ -8,6 +8,8 @@ class Portfolio < ApplicationRecord
   def refresh_rates(request_service)
     return if holdings.empty?
 
+    # debugger
+
     coins = self.coins
     rates = request_service.get_rates(coins)
     coins.each do |coin|
