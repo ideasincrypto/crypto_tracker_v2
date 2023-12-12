@@ -59,7 +59,13 @@ RSpec.describe Coin, type: :model do
     end
 
     it "doesn't save repeated coins" do
-      btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+      btc = Coin.create!(
+        name: "Bitcoin",
+        api_id: "bitcoin",
+        ticker: "BTC",
+        icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+        rate: 41177.07
+      )
       conn = ApiConnectionService.build
       request_service = ApiRequestsService.new(conn)
       json_contract = File.read(Rails.root.join("spec/support/json/markets_contract.json"))

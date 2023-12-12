@@ -8,7 +8,7 @@ class Coin < ApplicationRecord
   def self.load_coins(request_service)
     coins_data = request_service.get_coins_data
     coins_data.each do |c|
-      Coin.create(
+      Coin.find_or_create_by(
         name: c["name"],
         api_id: c["id"],
         ticker: c["symbol"].upcase,
