@@ -12,7 +12,7 @@ describe "User views the Portfolios menu" do
 
     expect(page).to have_selector "#portfolios-menu"
     within "#portfolios-menu" do
-      expect(page).to have_button "New Portfolio"
+      expect(page).to have_link "New Portfolio"
       expect(page).to have_content "Portfolios"
       expect(page).to have_link "Portfolio 1"
       expect(page).to have_link "Portfolio 2"

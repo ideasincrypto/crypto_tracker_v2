@@ -1,6 +1,17 @@
 require "rails_helper"
 
 describe "User Creates a new portfolio" do
+  it "from the home page" do
+    user = User.create!(email: "user@email.com", password: "123456")
+
+    login_as user, scope: :user
+    visit root_path
+    click_on "New Portfolio"
+
+    expect(page).to have_content "New Portfolio"
+    expect(page).to have_field "Portfolio name"
+    expect(page).to have_button "Create"
+  end
   it "successfully" do
     user = User.create!(email: "user@email.com", password: "123456")
 
