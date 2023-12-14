@@ -70,7 +70,7 @@ class HoldingsController < ApplicationController
   end
 
   def set_coins
-    @coins = Coin.where(enabled: true)
+    @coins = Coin.where(enabled: true).order(:ticker)
   end
 
   def set_holding
