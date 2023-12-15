@@ -20,6 +20,6 @@ class Portfolio < ApplicationRecord
     holdings.reduce(0.0) do |total, holding|
       total += holding.amount * holding.coin.rate
       total
-    end
+    end.round(2)
   end
 end
