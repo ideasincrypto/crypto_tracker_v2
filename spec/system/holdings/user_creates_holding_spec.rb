@@ -51,8 +51,8 @@ describe "User visits the new holding page" do
     within "tbody" do
       expect(page).to have_content "BTC"
       expect(page).to have_content 0.5
-      expect(page).to have_content 43882.07
-      expect(page).to have_content 21941.04
+      expect(page).to have_content "$43,882.07"
+      expect(page).to have_content "$21,941.04"
     end
   end
 

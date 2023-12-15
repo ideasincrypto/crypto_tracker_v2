@@ -25,9 +25,7 @@
             <th>Coin</th>
             <th>Amount</th>
             <th>Rate (USD)</th>
-            <th>24h change</th>
             <th>Value</th>
-            <th>%</th>
             <th>Remove</th>
           </tr>
         </thead>
@@ -37,9 +35,7 @@
               <td><%= holding.ticker %></td>
               <td><%= holding.amount %></td>
               <td><%= number_to_currency holding.rate %></td>
-              <td></td>
               <td><%= number_to_currency holding.value %></td>
-              <td></td>
               <td style="text-align: center;">
                 <%= button_to "X", portfolio_holding_path(@portfolio, holding), method: :delete, data: { turbo_confirm: "Remove #{holding.ticker} from portfolio?" } %>
               </td>
