@@ -21,10 +21,15 @@ describe "User visits the portfolio page" do
     click_on "Test Portfolio"
     expect(page).to have_content "BTC"
     expect(page).to have_content "1.0"
+    expect(page).to have_content "$43,841.49", count: 2
     expect(page).to have_content "ETH"
     expect(page).to have_content "2.0"
+    expect(page).to have_content "$2,344.74"
+    expect(page).to have_content "$4,689.48"
     expect(page).to have_content "ADA"
     expect(page).to have_content "100.0"
-    expect(page).to have_content "48589.97"
+    expect(page).to have_content "$0.59"
+    expect(page).to have_content "$59.00"
+    expect(page).to have_content "$48,589.97"
   end
 end

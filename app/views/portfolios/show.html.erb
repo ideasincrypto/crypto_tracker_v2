@@ -36,9 +36,9 @@
             <tr>
               <td><%= holding.ticker %></td>
               <td><%= holding.amount %></td>
-              <td><%= holding.rate %></td>
+              <td><%= number_to_currency holding.rate %></td>
               <td></td>
-              <td><%= holding.value %></td>
+              <td><%= number_to_currency holding.value %></td>
               <td></td>
               <td style="text-align: center;">
                 <%= button_to "X", portfolio_holding_path(@portfolio, holding), method: :delete, data: { turbo_confirm: "Remove #{holding.ticker} from portfolio?" } %>
@@ -49,7 +49,7 @@
         <tfoot>
           <tr>
             <td colspan="4" id="total-col">TOTAL</td>
-            <td colspan="2"><%= @portfolio.total_value %></td>
+            <td colspan="2"><%= number_to_currency @portfolio.total_value %></td>
           </tr>
         </tfoot>
       </table>
