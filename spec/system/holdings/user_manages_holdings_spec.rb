@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "User opens the manage options window" do
   it "from the home page" do
-    btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    btc = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create(coin: btc, amount: 0.5)
@@ -25,7 +28,10 @@ describe "User opens the manage options window" do
   end
 
   it "and deposits funds to portfolio" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -52,7 +58,10 @@ describe "User opens the manage options window" do
   end
 
   it "and can't deposit with negative amount" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -76,7 +85,10 @@ describe "User opens the manage options window" do
   end
 
   it "and withdraws funds from portfolio" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -103,7 +115,10 @@ describe "User opens the manage options window" do
   end
 
   it "and can't withdraw more than the holdings total" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -126,7 +141,10 @@ describe "User opens the manage options window" do
   end
 
   it "and updates a holding" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -152,7 +170,10 @@ describe "User opens the manage options window" do
   end
 
   it "and can't update a holding with negative amount" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -174,7 +195,10 @@ describe "User opens the manage options window" do
   end
 
   it "and deletes a holding" do
-    coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
+    coin = Coin.create!(name: "Bitcoin",
+                       api_id: "bitcoin",
+                       ticker: "BTC",
+                       icon: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
     user = User.create!(email: "user@email.com", password: "123456")
     portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
     holding = portfolio.holdings.create!(coin: coin, amount: 0.5)
@@ -187,7 +211,7 @@ describe "User opens the manage options window" do
     allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
     visit portfolio_path(portfolio)
     within "#coins-table" do
-      click_on "X"
+      click_on "Manage"
     end
 
     expect(page).to have_content "BTC removed from portfolio"
