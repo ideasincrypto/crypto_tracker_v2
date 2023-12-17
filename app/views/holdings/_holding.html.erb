@@ -1,14 +1,22 @@
-<div class="asset-details col-md-4">
-  <%= image_tag holding.icon, size: "25x25" %>
-  <%= holding.ticker %>
-  <%= number_to_currency holding.rate %>
-</div>
+<div class="d-flex align-items-center ms-5">
+  <div class="d-flex col">
+    <%= image_tag holding.icon, size: "35x35", class: "align-self-center" %>
 
-<div class="balance-details col-md-4">
-  <%= holding.amount %>
-  <%= number_to_currency holding.value %>
-</div>
+    <div class="col d-flex flex-column m-2">
+      <span class="fs-3"><%= holding.ticker %></span>
+      <br>
+      <span class="fs-7 text-white-50"><%= number_to_currency holding.rate %></span>
+    </div>
+  </div>
 
-<div class="manage-cell col-md-4">
-  <%= link_to "Manage" %>
+  <div class="col balance-details d-flex justify-content-start">
+    <div class="d-flex flex-column">
+      <span class="fs-3"><%= holding.amount %></span>
+      <span class="fs-6 text-white-50"><%= number_to_currency holding.value %></span>
+    </div>
+  </div>
+
+  <div class="col manage-cell">
+    <%= link_to "Manage", root_path, class: "btn btn-lg btn-outline-secondary" %>
+  </div>
 </div>

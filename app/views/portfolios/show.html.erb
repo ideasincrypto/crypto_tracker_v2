@@ -6,14 +6,14 @@
 
   <br>
   
-  <div id="portfolio-container" class="container border border-dark rounded-2 p-3">
+  <div id="portfolio-container" class="container border border-dark rounded-2 p-3 bg-dark text-white">
 
-    <div id="portfolio-header" class="row align-baseline">
+    <div id="portfolio-header" class="row align-baseline ms-5 d-flex align-items-end">
       <div class="col-md-4 ">
         <h3 class="display-5"><%= @portfolio.name %></h3>
       </div>
-      <div id="portfolio-balance" class="col-md-4">
-        <h6 class="">Balance:</h6>
+      <div id="portfolio-balance" class="col-md-4 d-flex flex-column">
+        <span class="text-white-50 ">Balance:</span>
         <span class="fs-2"><%= number_to_currency @portfolio.total_value %></span>
       </div>
 
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <hr>
+    <hr class="border border-black opacity-50">
 
     <% if @portfolio.holdings.empty? %>
       <div>
@@ -32,18 +32,18 @@
     <% end %>
     
     <div id="coins-table">
-      <div id="list-header" class="row">
+      <div id="list-header" class="row d-flex justify-content-around mb-3 ms-5">
         <div class="col-md-4">
-          <p>Asset</p>
+          <span class="fs-5 text-white-50">Asset</span>
         </div>
         <div class="col-md-4">
-          <p>Balance</p>
+          <span class="fs-5 text-white-50">Balance</span>
         </div>
         <div class="col-md-4"></div>
       </div>
-      <div id="coins-list">
+      <div id="coins-list" >
         <% @portfolio.holdings.each do |holding| %>
-          <div class="coin-cell row mb-5" id="<%= holding.ticker.downcase %>_details">
+          <div class="coin-cell row mb-2 rounded-2 align-items-center" id="<%= holding.ticker.downcase %>_details">
             <%= render holding %>
           </div>
         <% end %>
