@@ -6,7 +6,7 @@ class Holding < ApplicationRecord
 
   validate :unique_coin
 
-  delegate :ticker, :rate, to: :coin
+  delegate :ticker, :rate, :icon, to: :coin
 
   def deposit(amount)
     raise ArgumentError, "Amount must be positive" unless amount.positive?
