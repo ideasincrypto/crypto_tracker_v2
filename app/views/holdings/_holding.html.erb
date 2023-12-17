@@ -1,14 +1,14 @@
-<div class="asset-details">
-  <%= image_tag holding.icon, size: "20x20" %>
+<div class="asset-details col-md-4">
+  <%= image_tag holding.icon, size: "25x25" %>
   <%= holding.ticker %>
   <%= number_to_currency holding.rate %>
 </div>
 
-<div class="balance-details">
+<div class="balance-details col-md-4">
   <%= holding.amount %>
   <%= number_to_currency holding.value %>
 </div>
 
-<div class="manage-cell">
+<div class="manage-cell col-md-4">
   <%= link_to "Manage" %>
 </div>

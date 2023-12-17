@@ -6,24 +6,23 @@
 
   <br>
   
-  <div id="portfolio-container">
+  <div id="portfolio-container" class="container border border-dark rounded-2 p-3">
 
-    <div id="portfolio-header">
-      <h3><%= @portfolio.name %></h3>
-      <div id="portfolio-balance">
-        <h4>Balance:</h4>
-        <%= number_to_currency @portfolio.total_value %>
+    <div id="portfolio-header" class="row align-baseline">
+      <div class="col-md-4 ">
+        <h3 class="display-5"><%= @portfolio.name %></h3>
+      </div>
+      <div id="portfolio-balance" class="col-md-4">
+        <h6 class="">Balance:</h6>
+        <span class="fs-2"><%= number_to_currency @portfolio.total_value %></span>
       </div>
 
-      <br>
-
-      <div id="portfolio-options">
-        <%= link_to "Add new Holding", new_portfolio_holding_path(@portfolio) %>
+      <div id="portfolio-options" class="col-md-4">
+        <%= link_to "Add new Holding", new_portfolio_holding_path(@portfolio) %> <br>
         <%= link_to "Manage portfolio" %>
       </div>
     </div>
 
-    <br>
     <hr>
 
     <% if @portfolio.holdings.empty? %>
@@ -33,14 +32,18 @@
     <% end %>
     
     <div id="coins-table">
-      <div id="list-header">
-        <p>Asset</p>
-        <p>Balance</p>
-        <p>%</p>
+      <div id="list-header" class="row">
+        <div class="col-md-4">
+          <p>Asset</p>
+        </div>
+        <div class="col-md-4">
+          <p>Balance</p>
+        </div>
+        <div class="col-md-4"></div>
       </div>
       <div id="coins-list">
         <% @portfolio.holdings.each do |holding| %>
-          <div class="coin-cell" id="<%= holding.ticker.downcase %>_details">
+          <div class="coin-cell row mb-5" id="<%= holding.ticker.downcase %>_details">
             <%= render holding %>
           </div>
         <% end %>
