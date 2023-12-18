@@ -1,16 +1,33 @@
 <section>
-  <h1><%= @portfolio.name %></h1>
 
-  <div id="portfolio-container">
-    <div>
-      <%= link_to "Add new Holding", new_portfolio_holding_path(@portfolio) %>
-    </div>
-    <br>
-    <div id="manage-options">
-      <%= render partial: "holdings/manage_options", locals: { portfolio: @portfolio, coins: @coins } %>
+  <div id="manage-options">
+    <%= render partial: "holdings/manage_options", locals: { portfolio: @portfolio, coins: @coins } %>
+  </div>
+
+  <br>
+  
+  <div id="portfolio-container" class="container border border-dark rounded-2 p-3 bg-dark text-white">
+
+    <div id="portfolio-header" class="row align-baseline ms-5 d-flex align-items-end">
+      <div class="col-md-4 ">
+        <h3 class="display-5"><%= @portfolio.name %></h3>
+      </div>
+      <div id="portfolio-balance" class="col-md-4 d-flex flex-column">
+        <span class="text-white-50 ">Balance:</span>
+        <span class="fs-2"><%= number_to_currency @portfolio.total_value %></span>
+      </div>
+
+      <div id="portfolio-options" class="col-md-4">
+        <%= link_to new_portfolio_holding_path(@portfolio), class: "text-white-50 ms-2 me-3", id: "new_holding_button" do %> 
+          <i class="fa-solid fa-plus fa-2xl"></i>
+        <% end %>
+        <%= link_to root_path, class: "text-white-50" do %>
+          <i class="fa-solid fa-gear fa-2xl"></i>
+        <% end %>
+      </div>
     </div>
 
-    <br>
+    <hr class="border border-black opacity-50">
 
     <% if @portfolio.holdings.empty? %>
       <div>
@@ -19,40 +36,22 @@
     <% end %>
     
     <div id="coins-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Coin</th>
-            <th>Amount</th>
-            <th>Rate (USD)</th>
-            <th>24h change</th>
-            <th>Value</th>
-            <th>%</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @portfolio.holdings.each do |holding| %>
-            <tr>
-              <td><%= holding.ticker %></td>
-              <td><%= holding.amount %></td>
-              <td><%= holding.rate %></td>
-              <td></td>
-              <td><%= holding.value %></td>
-              <td></td>
-              <td style="text-align: center;">
-                <%= button_to "X", portfolio_holding_path(@portfolio, holding), method: :delete, data: { turbo_confirm: "Remove #{holding.ticker} from portfolio?" } %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="4" id="total-col">TOTAL</td>
-            <td colspan="2"></td>
-          </tr>
-        </tfoot>
-      </table>
+      <div id="list-header" class="row d-flex justify-content-around mb-3 ms-5">
+        <div class="col-md-4">
+          <span class="fs-5 text-white-50">Asset</span>
+        </div>
+        <div class="col-md-4">
+          <span class="fs-5 text-white-50">Balance</span>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div id="coins-list" >
+        <% @portfolio.holdings.each do |holding| %>
+          <div class="coin-cell row mb-2 rounded-2 align-items-center" id="<%= holding.ticker.downcase %>_details">
+            <%= render holding %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
