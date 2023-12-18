@@ -18,7 +18,7 @@
       </div>
 
       <div id="portfolio-options" class="col-md-4">
-        <%= link_to new_portfolio_holding_path(@portfolio), class: "text-white-50 ms-2 me-3" do %> 
+        <%= link_to new_portfolio_holding_path(@portfolio), class: "text-white-50 ms-2 me-3", id: "new_holding_button" do %> 
           <i class="fa-solid fa-plus fa-2xl"></i>
         <% end %>
         <%= link_to root_path, class: "text-white-50" do %>

@@ -16,7 +16,7 @@ describe "User visits the new holding page" do
     allow(ApiConnectionService).to receive(:build).and_return(conn)
     allow(conn).to receive(:get).with("api/v3/simple/price").and_return(fake_response)
     click_on "Test Portfolio"
-    click_on "Add new Holding"
+    find("#new_holding_button").click
 
     expect(page).to have_content "New Holding"
     expect(page).to have_select "holding_coin_id", options: ["Coin", "BTC", "ETH", "ADA"]
