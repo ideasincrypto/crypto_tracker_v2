@@ -6,16 +6,16 @@
   <br>
   
   <%= turbo_frame_tag "portfolio_details" do %>
-    <div id="portfolio-container" 
-        class="container border border-dark rounded-2 p-3 bg-dark text-white">
-      <div id="portfolio-header" 
+    <div id="portfolio-container"
+        class="container border border-dark rounded-2 p-3 bg-dark text-white w-70">
+      <div id="portfolio-header"
           class="row align-baseline ms-5 d-flex align-items-end">
         <div class="col-md-4 ">
-          <h3 class="display-5"><%= @portfolio.name %></h3>
+          <h3 class="display-6"><%= @portfolio.name %></h3>
         </div>
         <div id="portfolio-balance" class="col-md-4 d-flex flex-column">
-          <span class="text-white-50 ">Balance:</span>
-          <span class="fs-2"><%= number_to_currency @portfolio.total_value %></span>
+          <span class="text-white-50 ">Total:</span>
+          <span class="fs-3"><%= number_to_currency @portfolio.total_value %></span>
         </div>
 
         <div id="portfolio-options" class="col-md-4">
@@ -31,7 +31,7 @@
       <hr class="border border-black opacity-50">
 
       <% if @portfolio.holdings.empty? %>
-        <div>
+        <div class="text-center text-white-50">
           <p>Your portfolio is empty. Add coins to see them here</p>
         </div>
       <% end %>

@@ -1,22 +1,22 @@
 <div class="d-flex align-items-center ms-5">
   <div class="d-flex col">
-    <%= image_tag holding.icon, size: "35x35", class: "align-self-center" %>
+    <%= image_tag holding.icon, size: "35x35", class: "align-self-center me-1" %>
 
     <div class="col d-flex flex-column m-2">
-      <span class="fs-3"><%= holding.ticker %></span>
+      <span class="fs-5"><%= holding.ticker %></span>
       <br>
-      <span class="fs-7 text-white-50"><%= number_to_currency holding.rate %></span>
+      <span class="fs-6 text-white-50"><%= number_to_currency holding.rate %></span>
     </div>
   </div>
 
   <div class="col balance-details d-flex justify-content-start">
     <div class="d-flex flex-column">
-      <span class="fs-3"><%= holding.amount %></span>
+      <span class="fs-5"><%= holding.amount %></span>
       <span class="fs-6 text-white-50"><%= number_to_currency holding.value %></span>
     </div>
   </div>
 
   <div class="col manage-cell">
-    <%= link_to "Manage", root_path, class: "btn btn-lg btn-outline-secondary" %>
+    <%= link_to "Manage", root_path, class: "btn btn btn-outline-secondary" %>
   </div>
 </div>

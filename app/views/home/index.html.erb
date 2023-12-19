@@ -1,24 +1,32 @@
 <section>
-  <%= turbo_frame_tag "portfolios_list" do %>
-    <nav id="portfolios-menu" class="border border-dark">
-      <div>
-        <%= link_to "New Portfolio", new_portfolio_path %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <%= turbo_frame_tag "portfolios_list" do %>
+          <nav id="portfolios-menu" class="border border-dark">
+            <div>
+              <%= link_to "New Portfolio", new_portfolio_path %>
+            </div>
+
+            <div>
+              <h3>Portfolios</h3>
+            </div>
+            <div>
+              <ul>
+                <% @portfolios.each do |p| %>
+                  <li>
+                    <%= link_to p.name, portfolio_path(p), data: { turbo_frame: "portfolio_details" } %>
+                    </li>
+                <% end %>
+              </ul>
+            </div>
+          </nav>
+        <% end %>
       </div>
 
-      <div>
-        <h3>Portfolios</h3>
+      <div class="col-md-8">
+        <%= turbo_frame_tag "portfolio_details" %>
       </div>
-      <div>
-        <ul>
-          <% @portfolios.each do |p| %>
-            <li>
-              <%= link_to p.name, portfolio_path(p), data: { turbo_frame: "portfolio_details" } %>
-              </li>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
-  <% end %>
-
-  <%= turbo_frame_tag "portfolio_details" %>
+    </div>
+  </div>
 </section>
