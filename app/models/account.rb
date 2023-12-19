@@ -7,6 +7,7 @@ class Account < ApplicationRecord
   def net_worth
     portfolios.reduce(0.0) do |total, p|
       total += p.total_value
+      total
     end
   end
 

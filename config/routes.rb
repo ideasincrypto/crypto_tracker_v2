@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     resources :holdings, only: [:new, :create, :update, :destroy]
   end
 
-  resource :account, only: %i[ show ]
+  resource :account, only: %i[ show ] do
+    get "assets", on: :member
+  end
 end

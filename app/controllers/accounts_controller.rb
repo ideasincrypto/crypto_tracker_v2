@@ -1,5 +1,15 @@
 class AccountsController < ApplicationController
-  def show
+  before_action :set_account, only: %i[ show assets ]
+
+  def show; end
+
+  def assets
+    @assets = []
+  end
+
+  private
+
+  def set_account
     @account = current_user.account
   end
 end
