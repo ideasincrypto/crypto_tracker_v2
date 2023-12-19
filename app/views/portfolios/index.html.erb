@@ -1,20 +1,26 @@
-<%= turbo_frame_tag "portfolios_list" do %>
-  <nav id="portfolios-menu" class="border border-dark">
-    <div>
-      <%= link_to "New Portfolio", new_portfolio_path %>
+<%= turbo_frame_tag "portfolios_console" do %>
+  <nav id="portfolios-menu" class="bg-dark text-white p-4 rounded-2">
+    <div class="d-flex justify-content-around">
+      <h3 class="display-6 fs-1">Portfolios</h3>
+      <%= link_to new_portfolio_path, class: "align-self-center text-white-50", 
+                                      title: "Add Portfolio" do %>
+        <i class="fa-solid fa-plus fa-2xl link-accent"></i>
+      <% end %>
     </div>
-
-    <div>
-      <h3>Portfolios</h3>
-    </div>
-    <div>
-      <ul>
-        <% @portfolios.each do |p| %>
-          <li>
-            <%= link_to p.name, portfolio_path(p), data: { turbo_frame: "portfolio_details" } %>
-            </li>
-        <% end %>
-      </ul>
-    </div>
+    <hr class="border border-black opacity-50">
+    <% @portfolios.each do |p| %>
+      <%= link_to portfolio_path(p), data: { turbo_frame: "portfolio_details" },
+          class: "link-underline link-underline-opacity-0 text-white-50" do %>
+        <div class="w-51 p-2 d-flex align-items-baseline link-accent row">
+          <div class="col-md-7">
+            <span class="fs-5 ms-1"><%= p.name %></span>
+          </div>
+          <div class="col-md-5">
+            <span class="fs-6"><%= number_to_currency p.total_value %></span>
+          </div>
+        </div>
+        <hr class="text-black">
+      <% end %>
+    <% end %>
   </nav>
 <% end %>
