@@ -4,6 +4,12 @@ class Account < ApplicationRecord
 
   before_validation :generate_uuid
 
+  def net_worth
+    portfolios.reduce(0.0) do |total, p|
+      total += p.total_value
+    end
+  end
+
   private
 
   def generate_uuid
