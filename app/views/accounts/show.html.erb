@@ -1,8 +1,11 @@
 <%= turbo_frame_tag "account_console" do %>
-  <div class="container text-white bg-dark rounded-3 upper-containers mb-3">
-    <div class="p-3 d-flex flex-column">
-      <h3 class="display-6 fs-4">Net worth</h3>
-      <span class="fs-2"><%= number_to_currency current_user.account.net_worth %></span>
+  <div class="container text-white bg-dark rounded-3 upper-containers mb-3 p-4">
+    <div class="d-flex flex-column mb-3">
+      <h3 class="fs-5 text-white-50 ">Net worth</h3>
+      <span class="fs-1"><%= number_to_currency current_user.account.net_worth %></span>
+    </div>
+    <div>
+      <%= link_to "Detailed view", root_path, class: "btn btn-outline-secondary w-100" %>
     </div>
   </div>
 <% end %>
