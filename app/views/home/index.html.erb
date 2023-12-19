@@ -1,19 +1,28 @@
 <section>
-  <nav id="portfolios-menu">
-    <div>
-      <%= link_to "New Portfolio", new_portfolio_path %>
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-md-4">
+        <%= turbo_frame_tag "account_console" %>
+      </div>
+
+      <div class="col-md-8">
+        <%= turbo_frame_tag "management_console" %>
+      </div>
     </div>
 
-    <div>
-      <h3>Portfolios</h3>
-    </div>
-    <div>
-      <ul>
-        <% @portfolios.each do |p| %>
-          <li><%= link_to p.name, portfolio_path(p) %></li>
-        <% end %>
-      </ul>
-    </div>
 
-  </nav>
+    <div class="row">
+      <div class="col-md-4">
+        <%= turbo_frame_tag "portfolios_console", src: portfolios_path %>
+      </div>
+
+      <div class="col-md-8">
+        <!-- src for this frame will be the account detailed view -->
+        <%= turbo_frame_tag "portfolio_details", 
+            src: portfolio_path(current_user.portfolios.first) %>
+      </div>
+    </div>
+    
+  </div>
 </section>

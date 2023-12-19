@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :account
+  has_many :portfolios, through: :account
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

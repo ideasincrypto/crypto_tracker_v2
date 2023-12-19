@@ -1,7 +1,11 @@
+require 'capybara/rspec'
+require 'selenium-webdriver'
 require "simplecov"
 SimpleCov.start "rails" do
   add_filter "channels"
   add_filter "mailers"
+  add_filter "helpers"
+  add_filter "jobs"
 end
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
@@ -47,6 +51,23 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # Configure the default driver for non-JS tests
+  Capybara.default_driver = :rack_test
+
+  # Configure the JavaScript driver for JS tests involving Turbo Frames
+  Capybara.javascript_driver = :selenium_chrome_headless
+
+  # Use the Selenium driver specifically for tests with the :js metadata
+  RSpec.configure do |config|
+    config.before(:each, js: true) do
+      Capybara.current_driver = :selenium_chrome_headless
+    end
+
+    config.after(:each, js: true) do
+      Capybara.use_default_driver
+    end
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false

@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :portfolios, only: [:index, :show, :new, :create] do
     resources :holdings, only: [:new, :create, :update, :destroy]
   end
+
+  resource :account, only: %i[ show ]
 end
