@@ -1,0 +1,20 @@
+<%= turbo_frame_tag "portfolios_list" do %>
+  <nav id="portfolios-menu" class="border border-dark">
+    <div>
+      <%= link_to "New Portfolio", new_portfolio_path %>
+    </div>
+
+    <div>
+      <h3>Portfolios</h3>
+    </div>
+    <div>
+      <ul>
+        <% @portfolios.each do |p| %>
+          <li>
+            <%= link_to p.name, portfolio_path(p), data: { turbo_frame: "portfolio_details" } %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+<% end %>

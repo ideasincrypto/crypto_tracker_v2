@@ -31,29 +31,30 @@
       <hr class="border border-black opacity-50">
 
       <% if @portfolio.holdings.empty? %>
-        <div class="text-center text-white-50">
+        <div class="text-center text-white-50 p-5">
           <p>Your portfolio is empty. Add coins to see them here</p>
         </div>
-      <% end %>
-      
-      <div id="coins-table">
-        <div id="list-header" class="row d-flex justify-content-around mb-3 ms-5">
-          <div class="col-md-4">
-            <span class="fs-5 text-white-50">Asset</span>
-          </div>
-          <div class="col-md-4">
-            <span class="fs-5 text-white-50">Balance</span>
-          </div>
-          <div class="col-md-4"></div>
-        </div>
-        <div id="coins-list" >
-          <% @portfolio.holdings.each do |holding| %>
-            <div class="coin-cell row mb-2 rounded-2 align-items-center" id="<%= holding.ticker.downcase %>_details">
-              <%= render holding %>
+
+      <% else %>
+        <div id="coins-table">
+          <div id="list-header" class="row d-flex justify-content-around mb-3 ms-5">
+            <div class="col-md-4">
+              <span class="fs-5 text-white-50">Asset</span>
             </div>
-          <% end %>
+            <div class="col-md-4">
+              <span class="fs-5 text-white-50">Balance</span>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div id="coins-list" >
+            <% @portfolio.holdings.each do |holding| %>
+              <div class="coin-cell row mb-2 rounded-2 align-items-center" id="<%= holding.ticker.downcase %>_details">
+                <%= render holding %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </section>

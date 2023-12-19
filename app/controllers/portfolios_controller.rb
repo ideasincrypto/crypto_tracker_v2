@@ -1,8 +1,8 @@
 class PortfoliosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_account, only: [:new, :create, :index]
-  before_action :set_portfolio, only: [:show, :index]
-  before_action :set_request_service, only: [:show]
+  before_action :set_account, only: %i[ new create index ]
+  before_action :set_portfolio, only: %i[ show ]
+  before_action :set_request_service, only: %i[ show ]
 
   def new
     @portfolio = Portfolio.new
@@ -19,7 +19,9 @@ class PortfoliosController < ApplicationController
     end
   end
 
-  def index; end
+  def index
+    @portfolios = current_user.portfolios
+  end
 
   def show
     # @portfolio.refresh_rates(@request_service)
