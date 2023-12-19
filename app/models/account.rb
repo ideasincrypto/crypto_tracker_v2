@@ -3,6 +3,10 @@ class Account < ApplicationRecord
   has_many :portfolios
 
   before_validation :generate_uuid
+  after_create do |acc|
+    acc.portfolios.create({ name: "Assets" })
+  end
+
 
   def net_worth
     portfolios.reduce(0.0) do |total, p|
