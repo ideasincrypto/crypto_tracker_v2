@@ -1,5 +1,17 @@
 <section>
   <div class="container">
+    
+    <div class="row">
+      <div class="col-md-4">
+        <%= turbo_frame_tag "account_console" %>
+      </div>
+
+      <div class="col-md-8">
+        <%= turbo_frame_tag "management_console" %>
+      </div>
+    </div>
+
+
     <div class="row">
       <div class="col-md-4">
         <%= turbo_frame_tag "portfolios_console", src: portfolios_path %>
@@ -11,5 +23,6 @@
             src: portfolio_path(current_user.portfolios.first) %>
       </div>
     </div>
+    
   </div>
 </section>
