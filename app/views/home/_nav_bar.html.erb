@@ -1,0 +1,16 @@
+<nav id="navigation-bar" class="navbar navbar-expand-lg bg-dark mb-4" data-bs-theme="dark">
+  <div class="container-sm">
+    <%= link_to "CryptoTracker", root_path, class: "navbar-brand display-1 fs-4" %>
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <span class="text-white-50 align-self-center me-3">&lt;<%= current_user.email %>&gt;</span>
+        <%= link_to root_path, class: "align-self-center", title: "Account" do %>
+            <i class="fa-solid fa-user fa-xl nav-link"></i>
+        <% end %>
+        <li><%= button_to "Log out", destroy_user_session_path, { method: :delete, class: "nav-link btn btn-outline-dark" } %></li>
+      <% else %>
+        <li><%= link_to "Log in", new_user_session_path, class: "nav-link" %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
