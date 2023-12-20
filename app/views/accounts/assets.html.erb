@@ -55,7 +55,7 @@
               </div>
 
               <div>
-                <%= (100 * (asset.first.rate * asset.second) / @account.net_worth).round(2) %>%
+                <%= number_to_percentage (100 * (asset.first.rate * asset.second) / @account.net_worth).round(2), precision: 2 %>
               </div>
             </div>
           </div>
