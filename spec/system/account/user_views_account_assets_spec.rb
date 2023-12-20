@@ -24,14 +24,29 @@ describe "User views account assets" do
   end
 
   it "and see the account's assets" do
-    coin_a = Coin.create!(name: "Coin A", api_id: "coin_a", ticker: "CNA", rate: 1)
-    coin_b = Coin.create!(name: "Coin B", api_id: "coin_b", ticker: "CNB", rate: 2)
-    coin_c = Coin.create!(name: "Coin C", api_id: "coin_c", ticker: "CNC", rate: 3)
+    icon_url = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+    coin_a = Coin.create!(name: "Coin A",
+                          api_id: "coin_a",
+                          ticker: "CNA",
+                          rate: 1,
+                          icon: icon_url)
+    coin_b = Coin.create!(name: "Coin B",
+                          api_id: "coin_b",
+                          ticker: "CNB",
+                          rate: 2,
+                          icon: icon_url)
+    coin_c = Coin.create!(name: "Coin C",
+                          api_id: "coin_c",
+                          ticker: "CNC",
+                          rate: 3,
+                          icon: icon_url)
     user = User.create!(email: "user@email.com", password: "123456")
-    portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
-    portfolio.holdings.create([{ coin: coin_a, amount: 10 },
-                               { coin: coin_b, amount: 6 },
-                               { coin: coin_c, amount: 8 }])
+    portfolio_1 = Portfolio.create!(account: user.account, name: "Portfolio 1")
+    portfolio_1.holdings.create([{ coin: coin_a, amount: 10 },
+                                 { coin: coin_b, amount: 2 },])
+    portfolio_2 = Portfolio.create!(account: user.account, name: "Portfolio 2")
+    portfolio_2.holdings.create([{ coin: coin_b, amount: 4 },
+                                 { coin: coin_c, amount: 8 }])
 
     login_as user, scope: :user
     visit assets_account_path

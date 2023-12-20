@@ -40,8 +40,7 @@
           <div id="<%= asset.first.ticker %>_asset">
             <div>
               <div>
-                <!-- IMAGE TAG HERE -->
-
+                <%= image_tag asset.first.icon, size: "35x35" %>
                 <div>
                   <span><%= asset.first.ticker %></span>
                   <br>
@@ -56,7 +55,6 @@
               </div>
 
               <div>
-                <!-- PERCENTAGE -->
                 <%= (100 * (asset.first.rate * asset.second) / @account.net_worth).round(2) %>%
               </div>
             </div>
