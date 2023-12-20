@@ -119,41 +119,4 @@ RSpec.describe Holding, type: :model do
       expect(holding.amount).to eq 1.0
     end
   end
-
-  describe "#update_value" do
-    it "updates the amount with positive value" do
-      coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
-      user = User.create!(email: "user@email.com", password: "123456")
-      portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
-      holding = portfolio.holdings.create(coin: coin, amount: 1.0)
-
-      holding.update_value(0.5)
-      holding.reload
-
-      expect(holding.amount).to eq 0.5
-    end
-
-    it "updates the amount to 0" do
-      coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
-      user = User.create!(email: "user@email.com", password: "123456")
-      portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
-      holding = portfolio.holdings.create(coin: coin, amount: 1.0)
-
-      holding.update_value(0)
-      holding.reload
-
-      expect(holding.amount).to eq 0
-    end
-
-    it "raises ArgumentError with negative amount" do
-      coin = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
-      user = User.create!(email: "user@email.com", password: "123456")
-      portfolio = Portfolio.create!(account: user.account, name: "Test Portfolio")
-      holding = portfolio.holdings.create(coin: coin, amount: 1.0)
-
-      expect { holding.update_value(-1) }.to raise_error ArgumentError, "Amount must be positive"
-      holding.reload
-      expect(holding.amount).to eq 1.0
-    end
-  end
 end

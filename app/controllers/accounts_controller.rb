@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   def show; end
 
   def assets
-    @assets = []
+    assets = @account.assets
   end
 
   private

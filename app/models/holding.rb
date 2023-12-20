@@ -3,10 +3,10 @@ class Holding < ApplicationRecord
   belongs_to :portfolio
 
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
-
   validate :unique_coin
 
   delegate :ticker, :rate, :icon, to: :coin
+  delegate :account, to: :portfolio
 
   def deposit(amount)
     raise ArgumentError, "Amount must be positive" unless amount.positive?
