@@ -24,14 +24,6 @@ RSpec.describe User, type: :model do
       expect(invalid_user.account).to be_nil
       expect(Account.all.count).to eq 0
     end
-
-    it "creates Assets portfolio for account" do
-      user = User.create!(email: "user@email.com", password: "123456")
-
-      expect(user.portfolios.count).to eq 1
-      expect(user.portfolios.first.name).to eq "Assets"
-      expect(user.portfolios.first.holdings).to be_empty
-    end
   end
 
   describe ".update" do

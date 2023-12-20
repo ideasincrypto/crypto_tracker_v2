@@ -1,0 +1,68 @@
+<div class="container">
+  <div id="empty-assets">
+    <% if @assets.empty? %>
+      <p>You don't have any assets yet</p>
+
+      <% if @account.portfolios.empty? %>
+        <%= link_to "Create a new Portfolio", new_portfolio_path %>
+      <% else %>
+        <p>Add assets to you portfolios to see them here</p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div id="portfolio-container">
+    <div id="portfolio-header">
+      <div>
+        <h3>Account assets</h3>
+      </div>
+      <div id="account-balance">
+        <span>Total:</span>
+        <span><%= number_to_currency @account.net_worth %></span>
+      </div>
+    </div>
+    <div id="assets_table">
+      <div id="table-header">
+        <div>
+          <span>Asset</span>
+        </div>
+        <div>
+          <span>Balance</span>
+        </div>
+        <div>
+          <span>%</span>
+        </div>
+      </div>
+
+      <div id="assets-list">
+        <% @assets.each do |asset| %>
+          <!-- asset is an array that represents a deconstructed holding: [coin, amount] -->
+          <div id="<%= asset.first.ticker %>_asset">
+            <div>
+              <div>
+                <!-- IMAGE TAG HERE -->
+
+                <div>
+                  <span><%= asset.first.ticker %></span>
+                  <br>
+                  <span><%= asset.first.rate %></span>
+                </div>
+              </div>
+
+              <div>
+                <div>
+                  <span><%= number_to_currency asset.first.rate * asset.last %></span>
+                </div>
+              </div>
+
+              <div>
+                <!-- PERCENTAGE -->
+                <%= (100 * (asset.first.rate * asset.second) / @account.net_worth).round(2) %>%
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

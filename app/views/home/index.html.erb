@@ -19,8 +19,7 @@
 
       <div class="col-md-8">
         <!-- src for this frame will be the account detailed view -->
-        <%= turbo_frame_tag "portfolio_details", 
-            src: portfolio_path(current_user.portfolios.first) %>
+        <%= turbo_frame_tag "portfolio_details" %>
       </div>
     </div>
     

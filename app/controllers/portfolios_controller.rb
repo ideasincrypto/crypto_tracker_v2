@@ -24,8 +24,8 @@ class PortfoliosController < ApplicationController
   end
 
   def show
-    # @portfolio.refresh_rates(@request_service)
-    # @portfolio.holdings.reload
+    @portfolio.refresh_rates(@request_service)
+    @portfolio.holdings.reload
     @coins = @portfolio.holdings.map { |h| h.coin }
   end
 

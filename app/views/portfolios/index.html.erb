@@ -3,7 +3,8 @@
     <div class="d-flex justify-content-between">
       <h3 class="display-6 fs-3">Portfolios</h3>
       <%= link_to new_portfolio_path, class: "align-self-center text-white-50", 
-                                      title: "Add Portfolio" do %>
+                                      title: "Add Portfolio",
+                                      id: "new_portfolio_button" do %>
         <i class="fa-solid fa-plus fa-xl link-accent"></i>
       <% end %>
     </div>
