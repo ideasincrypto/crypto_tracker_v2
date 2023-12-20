@@ -15,7 +15,7 @@
           1,
           null,
           1,
-          1,
+          0,
           null,
           null
         ]
@@ -24,6 +24,18 @@
         "lines": [
           1,
           1,
+          null
+        ]
+      },
+      "/home/frederico/code/projects/crypto_tracker_v2/app/models/asset.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
           null
         ]
       },
@@ -56,136 +68,34 @@
           null
         ]
       },
-      "/home/frederico/code/projects/crypto_tracker_v2/app/models/account.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          4,
-          8,
-          8,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/home/frederico/code/projects/crypto_tracker_v2/app/models/portfolio.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          8,
-          16,
-          16,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/frederico/code/projects/crypto_tracker_v2/app/models/holding.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          6,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
       "/home/frederico/code/projects/crypto_tracker_v2/app/controllers/accounts_controller.rb": {
         "lines": [
-          1,
-          1,
+          0,
+          0,
           null,
-          1,
+          0,
           null,
-          1,
-          1,
+          0,
+          0,
+          0,
           null,
+          0,
           null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null
-        ]
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       },
       "/home/frederico/code/projects/crypto_tracker_v2/app/controllers/application_controller.rb": {
         "lines": [
-          1,
-          null
-        ]
+          0,
+          0
+        ],
+        "branches": {
+        }
       },
       "/home/frederico/code/projects/crypto_tracker_v2/app/controllers/coins_controller.rb": {
         "lines": [
@@ -627,6 +537,118 @@
         "branches": {
         }
       },
+      "/home/frederico/code/projects/crypto_tracker_v2/app/models/account.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/frederico/code/projects/crypto_tracker_v2/app/models/holding.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/frederico/code/projects/crypto_tracker_v2/app/models/portfolio.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/home/frederico/code/projects/crypto_tracker_v2/app/services/api_connection_service.rb": {
         "lines": [
           0,
@@ -687,6 +709,6 @@
         }
       }
     },
-    "timestamp": 1703100799
+    "timestamp": 1703101270
   }
 }
