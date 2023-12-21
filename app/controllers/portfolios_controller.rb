@@ -14,11 +14,14 @@ class PortfoliosController < ApplicationController
 
     respond_to do |format|
       if @portfolio.save
-        format.turbo_stream
-        format.html { redirect_to @portfolio, notice: "Portfolio created successfuly" }
+        format.turbo_stream { flash.now[:success] = "Portfolio created" }
+        format.html { redirect_to @portfolio, success: "Portfolio created" }
       else
         flash.now[:error] = "ERROR: couldn't save portfolio"
-        render :new, status: :unprocessable_entity
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("form_title", partial: "shared/flash")
+        end
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -28,8 +31,8 @@ class PortfoliosController < ApplicationController
   end
 
   def show
-    @portfolio.refresh_rates(@request_service)
-    @portfolio.holdings.reload
+    # @portfolio.refresh_rates(@request_service)
+    # @portfolio.holdings.reload
     @coins = @portfolio.holdings.map { |h| h.coin }
   end
 

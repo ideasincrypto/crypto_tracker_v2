@@ -6,3 +6,7 @@
   <% @portfolio = Portfolio.new %>
   <%= render template: "portfolios/new" %>
 <% end %>
+
+<%= turbo_stream.replace "form_title" do %>
+  <%= render partial: "shared/flash" %>
+<% end %>

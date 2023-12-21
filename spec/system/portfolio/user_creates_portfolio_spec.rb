@@ -32,6 +32,10 @@ describe "User Creates a new portfolio", js: true do
       expect(page).to have_content "My Portfolio"
       expect(page).to have_content "$0.00"
     end
+    within("turbo-frame[id='management_console']") do
+      expect(page).to have_field "Portfolio name", with: ""
+      expect(page).to have_content "Portfolio created"
+    end
     expect(Portfolio.all.count).to eq 1
     expect(user.account.portfolios.last.name).to eq "My Portfolio"
   end
