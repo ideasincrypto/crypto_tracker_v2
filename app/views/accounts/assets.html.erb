@@ -1,66 +1,78 @@
-<div class="container">
-  <div id="empty-assets">
-    <% if @assets.empty? %>
-      <p>You don't have any assets yet</p>
+<%= turbo_frame_tag "portfolio_details" do %>
+  <div id="portfolio-container" 
+       class="container border border-dark rounded-2 p-3 bg-dark text-white w-70">
+    <div id="empty-assets">
+      <% if @assets.empty? %>
+        <p>You don't have any assets yet</p>
 
-      <% if @account.portfolios.empty? %>
-        <%= link_to "Create a new Portfolio", new_portfolio_path %>
-      <% else %>
-        <p>Add assets to you portfolios to see them here</p>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div id="portfolio-container">
-    <div id="portfolio-header">
-      <div>
-        <h3>Account assets</h3>
-      </div>
-      <div id="account-balance">
-        <span>Total:</span>
-        <span><%= number_to_currency @account.net_worth %></span>
-      </div>
-    </div>
-    <div id="assets_table">
-      <div id="table-header">
-        <div>
-          <span>Asset</span>
-        </div>
-        <div>
-          <span>Balance</span>
-        </div>
-        <div>
-          <span>%</span>
-        </div>
-      </div>
-
-      <div id="assets-list">
-        <% @assets.each do |asset| %>
-          <!-- asset is an array that represents a deconstructed holding: [coin, amount] -->
-          <div id="<%= asset.first.ticker %>_asset">
-            <div>
-              <div>
-                <%= image_tag asset.first.icon, size: "35x35" %>
-                <div>
-                  <span><%= asset.first.ticker %></span>
-                  <br>
-                  <span><%= asset.first.rate %></span>
-                </div>
-              </div>
-
-              <div>
-                <div>
-                  <span><%= number_to_currency asset.first.rate * asset.last %></span>
-                </div>
-              </div>
-
-              <div>
-                <%= number_to_percentage (100 * (asset.first.rate * asset.second) / @account.net_worth).round(2), precision: 2 %>
-              </div>
-            </div>
-          </div>
+        <% if @account.portfolios.empty? %>
+          <%= link_to "Create a new Portfolio", new_portfolio_path %>
+        <% else %>
+          <p>Add assets to you portfolios to see them here</p>
         <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <div id="portfolio-header"
+           class="row align-baseline ms-5 d-flex align-items-end">
+        <div class="col-md-4">
+          <h3 class="display-6 fs-2">Account assets</h3>
+        </div>
+        <div id="account-balance" class="col-md-4 d-flex flex-column">
+          <span class="text-white-50">Total:</span>
+          <span class="fs-3"><%= number_to_currency @account.net_worth %></span>
+        </div>
+      </div>
+
+      <hr class="border border-black opacity-50">
+
+      <div id="assets_table">
+        <div id="table-header" class="row d-flex justify-content-around mb-3 ms-5">
+          <div class="col-md-4">
+            <span class="fs-5 text-white-50">Asset</span>
+          </div>
+          <div class="col-md-4">
+            <span class="fs-5 text-white-50">Balance</span>
+          </div>
+          <div class="col-md-4">
+            <span class="fs-5 text-white-50">%</span>
+          </div>
+        </div>
+
+        <div id="assets-list">
+          <% @assets.each do |asset| %>
+            <div id="<%= asset.first.ticker %>_asset"
+                 class="coin-cell row mb-2 rounded-2 align-items-center">
+
+              <div class="d-flex align-items-center justify-content-between ms-5">
+                <div class="d-flex col-md-4">
+                  <%= image_tag asset.first.icon, size: "35x35", class: "align-self-center me-1" %>
+                  <div class="col d-flex flex-column m-2">
+                    <span class="fs-5"><%= asset.first.ticker %></span>
+                    <br>
+                    <span class="fs-6 text-white-50"><%= asset.first.rate %></span>
+                  </div>
+                </div>
+
+                <div class="col-md-4 balance-details d-flex justify-content-start">
+                  <div class="d-flex flex-column">
+                    <span class="fs-5"><%= asset.last %></span>
+                    <span class="fs-6 text-white-50"><%= number_to_currency asset.first.rate * asset.last %></span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <span class="fs-5">
+                    <%= number_to_percentage (100 * (asset.first.rate * asset.last) / @account.net_worth).round(2), precision: 2 %>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
