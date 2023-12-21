@@ -1,3 +1,7 @@
 .link-accent:hover {
   color: white;
 }
+
+.upper-containers {
+  height: 200px;
+}

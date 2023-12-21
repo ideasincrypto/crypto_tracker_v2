@@ -2,6 +2,7 @@ class PortfoliosController < ApplicationController
   before_action :authenticate_user!
   before_action :set_account, only: %i[ new create index ]
   before_action :set_portfolio, only: %i[ show ]
+  before_action :set_holdings, only: %i[ show ]
   before_action :set_request_service, only: %i[ show ]
 
   def new
@@ -24,8 +25,8 @@ class PortfoliosController < ApplicationController
   end
 
   def show
-    # @portfolio.refresh_rates(@request_service)
-    # @portfolio.holdings.reload
+    @portfolio.refresh_rates(@request_service)
+    @portfolio.holdings.reload
     @coins = @portfolio.holdings.map { |h| h.coin }
   end
 
@@ -37,6 +38,10 @@ class PortfoliosController < ApplicationController
 
   def set_account
     @account = current_user.account
+  end
+
+  def set_holdings
+    @holdings = @portfolio.holdings.sort { |a, b| b.value <=> a.value }
   end
 
   def portfolio_params

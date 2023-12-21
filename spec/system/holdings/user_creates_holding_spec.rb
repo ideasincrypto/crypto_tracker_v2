@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User visits the new holding page" do
+describe "User visits the new holding page", js: true do
   it "from the home page" do
     btc = Coin.create!(name: "Bitcoin", api_id: "bitcoin", ticker: "BTC")
     eth = Coin.create!(name: "Ethereum", api_id: "ethereum", ticker: "ETH")
@@ -18,7 +18,7 @@ describe "User visits the new holding page" do
     click_on "Test Portfolio"
     find("#new_holding_button").click
 
-    expect(page).to have_content "New Holding"
+    expect(page).to have_selector "New Holding"
     expect(page).to have_select "holding_coin_id", options: ["Coin", "BTC", "ETH", "ADA"]
     expect(page).to have_field "Amount"
     expect(page).to have_button "Add"

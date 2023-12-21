@@ -1,0 +1,54 @@
+<%= turbo_frame_tag "portfolio_details" do %>
+  <div id="portfolio-container" 
+       class="container border border-dark rounded-2 p-3 bg-dark text-white w-70">
+    <div id="empty-assets">
+      <% if @assets.empty? %>
+        <p>You don't have any assets yet</p>
+
+        <% if @account.portfolios.empty? %>
+          <%= link_to "Create a new Portfolio", new_portfolio_path %>
+        <% else %>
+          <p>Add assets to you portfolios to see them here</p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <div id="portfolio-header"
+           class="row align-baseline ms-5 d-flex align-items-end">
+        <div class="col-md-4">
+          <h3 class="display-6 fs-2">Account assets</h3>
+        </div>
+        <div id="account-balance" class="col-md-4 d-flex flex-column">
+          <span class="text-white-50">Total:</span>
+          <span class="fs-3"><%= number_to_currency @account.net_worth %></span>
+        </div>
+      </div>
+
+      <hr class="border border-black opacity-50">
+
+      <div id="assets_table">
+        <div id="table-header" class="row d-flex justify-content-around mb-3 ms-5">
+          <div class="col-md-4">
+            <span class="fs-5 text-white-50">Asset</span>
+          </div>
+          <div class="col-md-4">
+            <span class="fs-5 text-white-50">Balance</span>
+          </div>
+          <div class="col-md-4">
+            <span class="fs-5 text-white-50">%</span>
+          </div>
+        </div>
+
+        <div id="assets-list">
+          <% @assets.each do |asset| %>
+            <div id="<%= asset.coin.ticker %>_asset"
+                 class="coin-cell row mb-2 rounded-2 align-items-center">
+              <%= render partial: "asset", locals: { asset: asset, account: @account } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

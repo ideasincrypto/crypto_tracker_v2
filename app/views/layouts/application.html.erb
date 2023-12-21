@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/2fb305fc96.js" crossorigin="anonymous"></script>
   </head>
 
-  <body class="bg-black">
+  <body class="bg-black d-flex flex-column">
     
     <%= render "home/nav_bar" %>
 
@@ -24,9 +24,9 @@
 
     <%= yield %>
 
-    <footer class="mt-5">
-      <div class="sticky-bottom text-white-50 text-center p-1 bg-dark">
-        <small>Designed and coded by Frederico Mozzato. Data from <a href="https://www.coingecko.com/en/api" class="text-white-50 link-accent">CoinGecko</a></small>
+    <footer class="mt-5 fixed-bottom">
+      <div class="text-white-50 text-center p-1 bg-dark">
+        <small>Designed and coded by <a href="https://github.com/fredericomozzato" class="text-white-50 link-accent">Frederico Mozzato</a> | Data from <a href="https://www.coingecko.com/en/api" class="text-white-50 link-accent">CoinGecko</a></small>
       </div>
     </footer>
 
