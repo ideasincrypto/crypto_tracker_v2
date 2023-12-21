@@ -15,7 +15,7 @@ class Account < ApplicationRecord
   def assets
     holdings.group(:coin).sum(:amount).each_with_object([]) do |asset, res|
       res << Asset.new(coin: asset.first, amount: asset.second, account: self)
-    end
+    end.sort { |a, b| b.percentage <=> a.percentage }
   end
 
   private

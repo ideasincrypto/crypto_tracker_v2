@@ -48,7 +48,7 @@
           </div>
           
           <div id="coins-list" >
-            <% @portfolio.holdings.each do |holding| %>
+            <% @holdings.each do |holding| %>
               <div class="coin-cell row mb-2 rounded-2 align-items-center" id="<%= holding.ticker.downcase %>_details">
                 <%= render holding %>
               </div>
