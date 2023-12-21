@@ -42,7 +42,7 @@
 
         <div id="assets-list">
           <% @assets.each do |asset| %>
-            <div id="<%= asset.first.ticker %>_asset"
+            <div id="<%= asset.coin.ticker %>_asset"
                  class="coin-cell row mb-2 rounded-2 align-items-center">
               <%= render partial: "asset", locals: { asset: asset, account: @account } %>
             </div>

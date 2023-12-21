@@ -29,7 +29,7 @@ RSpec.describe Account, type: :model do
   end
 
   describe "#assets" do
-    it "returns a hash with all aggregated assets" do
+    it "returns aan array with all aggregated assets for the account" do
       coin_a = Coin.create!(name: "Coin A", api_id: "coin_a", ticker: "CNA", rate: 1)
       coin_b = Coin.create!(name: "Coin B", api_id: "coin_b", ticker: "CNB", rate: 2)
       coin_c = Coin.create!(name: "Coin C", api_id: "coin_c", ticker: "CNC", rate: 3)
@@ -43,12 +43,18 @@ RSpec.describe Account, type: :model do
       assets = user.account.assets
 
       expect(assets.count).to eq 3
-      expect(assets).to include coin_a
-      expect(assets).to include coin_b
-      expect(assets).to include coin_c
-      expect(assets[coin_a]).to eq 10
-      expect(assets[coin_b]).to eq 6
-      expect(assets[coin_c]).to eq 4
+      expect(assets.first).to be_a Asset
+      expect(assets.second).to be_a Asset
+      expect(assets.third).to be_a Asset
+      expect(assets.first.coin).to eq coin_a
+      expect(assets.first.amount).to eq 10
+      expect(assets.first.account).to eq user.account
+      expect(assets.second.coin).to eq coin_b
+      expect(assets.second.amount).to eq 6
+      expect(assets.second.account).to eq user.account
+      expect(assets.third.coin).to eq coin_c
+      expect(assets.third.amount).to eq 4
+      expect(assets.third.account).to eq user.account
     end
 
     it "returns an empty hash if there are no portfolios" do

@@ -13,7 +13,9 @@ class Account < ApplicationRecord
   end
 
   def assets
-    holdings.group(:coin).sum(:amount)
+    holdings.group(:coin).sum(:amount).each_with_object([]) do |asset, res|
+      res << Asset.new(coin: asset.first, amount: asset.second, account: self)
+    end
   end
 
   private
