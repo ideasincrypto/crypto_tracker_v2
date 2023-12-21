@@ -12,11 +12,14 @@ class PortfoliosController < ApplicationController
   def create
     @portfolio = @account.portfolios.build(portfolio_params)
 
-    if @portfolio.save
-      redirect_to @portfolio, notice: "Portfolio created successfuly"
-    else
-      flash.now[:error] = "ERROR: couldn't save portfolio"
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @portfolio.save
+        format.turbo_stream
+        format.html { redirect_to @portfolio, notice: "Portfolio created successfuly" }
+      else
+        flash.now[:error] = "ERROR: couldn't save portfolio"
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 

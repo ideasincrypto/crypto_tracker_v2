@@ -1,13 +1,16 @@
 require "rails_helper"
 
-describe "User Creates a new portfolio" do
+describe "User Creates a new portfolio", js: true do
   it "from the home page" do
     user = User.create!(email: "user@email.com", password: "123456")
 
     login_as user, scope: :user
     visit root_path
-    click_on "New Portfolio"
+    within("turbo-frame[id='portfolios_console']") do
+      find("#new_portfolio_button").click
+    end
 
+    within("turbo-frame[id='management_console']")
     expect(page).to have_content "New Portfolio"
     expect(page).to have_field "Portfolio name"
     expect(page).to have_button "Create"
@@ -16,16 +19,21 @@ describe "User Creates a new portfolio" do
     user = User.create!(email: "user@email.com", password: "123456")
 
     login_as user, scope: :user
-    visit new_portfolio_path
-    fill_in "Portfolio name", with: "My Portfolio"
-    click_on "Create"
+    visit root_path
+    within("turbo-frame[id='portfolios_console']") do
+      find("#new_portfolio_button").click
+    end
+    within("turbo-frame[id='management_console']") do
+      fill_in "Portfolio name", with: "My Portfolio"
+      click_on "Create"
+    end
 
+    within("turbo-frame[id='portfolios_console']") do
+      expect(page).to have_content "My Portfolio"
+      expect(page).to have_content "$0.00"
+    end
     expect(Portfolio.all.count).to eq 1
     expect(user.account.portfolios.last.name).to eq "My Portfolio"
-    expect(page).to have_content "Portfolio created successfuly"
-    expect(page).to have_content "My Portfolio"
-    expect(page).to have_selector "#new_holding_button"
-    expect(page).to have_content "Your portfolio is empty. Add coins to see them here"
   end
 
   it "unsuccessfully without name" do

@@ -1,0 +1,12 @@
+<%= link_to portfolio_path(portfolio), data: { turbo_frame: "portfolio_details" },
+    class: "link-underline link-underline-opacity-0 text-white-50" do %>
+  <div class="w-51 p-2 d-flex align-items-baseline link-accent row justify-content-between">
+    <div class="col-md-7">
+      <span class="fs-5 ms-1"><%= portfolio.name %></span>
+    </div>
+    <div class="col-md-5">
+      <span class="fs-6"><%= number_to_currency portfolio.total_value %></span>
+    </div>
+  </div>
+  <hr class="text-black">
+<% end %>

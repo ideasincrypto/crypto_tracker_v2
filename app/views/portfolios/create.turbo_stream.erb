@@ -1,0 +1,8 @@
+<%= turbo_stream.append "portfolios_console" do %>
+  <%= render partial: "portfolio_list_item", locals: { portfolio: @portfolio } %>
+<% end %>
+
+<%= turbo_stream.replace "management_console" do %>
+  <% @portfolio = Portfolio.new %>
+  <%= render template: "portfolios/new" %>
+<% end %>
