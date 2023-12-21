@@ -44,31 +44,7 @@
           <% @assets.each do |asset| %>
             <div id="<%= asset.first.ticker %>_asset"
                  class="coin-cell row mb-2 rounded-2 align-items-center">
-
-              <div class="d-flex align-items-center justify-content-between ms-5">
-                <div class="d-flex col-md-4">
-                  <%= image_tag asset.first.icon, size: "35x35", class: "align-self-center me-1" %>
-                  <div class="col d-flex flex-column m-2">
-                    <span class="fs-5"><%= asset.first.ticker %></span>
-                    <br>
-                    <span class="fs-6 text-white-50"><%= asset.first.rate %></span>
-                  </div>
-                </div>
-
-                <div class="col-md-4 balance-details d-flex justify-content-start">
-                  <div class="d-flex flex-column">
-                    <span class="fs-5"><%= asset.last %></span>
-                    <span class="fs-6 text-white-50"><%= number_to_currency asset.first.rate * asset.last %></span>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <span class="fs-5">
-                    <%= number_to_percentage (100 * (asset.first.rate * asset.last) / @account.net_worth).round(2), precision: 2 %>
-                  </span>
-                </div>
-              </div>
-
+              <%= render partial: "asset", locals: { asset: asset, account: @account } %>
             </div>
           <% end %>
         </div>

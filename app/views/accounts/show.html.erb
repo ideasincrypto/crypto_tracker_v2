@@ -5,7 +5,7 @@
       <span class="fs-1"><%= number_to_currency current_user.account.net_worth %></span>
     </div>
     <div>
-      <%= link_to "Assets view", root_path, class: "btn btn-outline-secondary w-100" %>
+      <%= link_to "Assets view", assets_account_path, class: "btn btn-outline-secondary w-100", data: { turbo_frame: "portfolio_details" } %>
     </div>
   </div>
 <% end %>
