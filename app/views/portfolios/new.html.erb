@@ -1,17 +1,19 @@
-<%= render partial: "shared/form_errors", locals: { model: @portfolio } %>
+<%= turbo_frame_tag "management_console" do %>
+  <%= render partial: "shared/form_errors", locals: { model: @portfolio } %>
 
-<section>
-  <h1>New Portfolio</h1>
-  
-  <div>
-    <%= form_with model: @portfolio do |f| %>
-      <div>
-        <%= f.label :name, "Portfolio name:" %>
-        <%= f.text_field :name %>
-      </div>
-      <div>
-        <%= f.submit "Create" %>
-      </div>
-    <% end %>
+  <div class="container bg-dark rounded-3 text-white p-4">
+    <h1>New Portfolio</h1>
+    
+    <div>
+      <%= form_with model: @portfolio do |f| %>
+        <div>
+          <%= f.label :name, "Portfolio name:" %>
+          <%= f.text_field :name %>
+        </div>
+        <div>
+          <%= f.submit "Create" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</section>
+<% end %>

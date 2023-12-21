@@ -1,14 +1,18 @@
 <%= turbo_frame_tag "portfolios_console" do %>
   <nav id="portfolios-menu" class="bg-dark text-white p-4 rounded-2">
+
     <div class="d-flex justify-content-between">
       <h3 class="display-6 fs-3">Portfolios</h3>
       <%= link_to new_portfolio_path, class: "align-self-center text-white-50", 
                                       title: "Add Portfolio",
-                                      id: "new_portfolio_button" do %>
+                                      id: "new_portfolio_button",
+                                      data: { turbo_frame: "management_console" } do %>
         <i class="fa-solid fa-plus fa-xl link-accent"></i>
       <% end %>
     </div>
+
     <hr class="border border-black opacity-50">
+
     <% @portfolios.each do |p| %>
       <%= link_to portfolio_path(p), data: { turbo_frame: "portfolio_details" },
           class: "link-underline link-underline-opacity-0 text-white-50" do %>
